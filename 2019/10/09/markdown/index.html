@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>마크다운 (markdown) | People and Technology</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="markdown">
+    
+    <meta name="description" content="마크다운 (markdown) github 블로그 페이지에 글을 작성하기 위해서는 먼저 마크다운의 기본적인 사용법을 익혀야 합니다.  1.마크다운이란? 마크다운 (Markdown)은 마크업 언어의 일종으로, 존 그루버(John Gruber)와 아론 스워츠(Aaron Swartz)가 만들었다. 온갖 태그로 범벅된 HTML 문서 등과 달리, 읽기도 쓰기도 쉬운">
+<meta name="keywords" content="markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="마크다운 (markdown)">
+<meta property="og:url" content="http://yoursite.com/2019/10/09/markdown/index.html">
+<meta property="og:site_name" content="People and Technology">
+<meta property="og:description" content="마크다운 (markdown) github 블로그 페이지에 글을 작성하기 위해서는 먼저 마크다운의 기본적인 사용법을 익혀야 합니다.  1.마크다운이란? 마크다운 (Markdown)은 마크업 언어의 일종으로, 존 그루버(John Gruber)와 아론 스워츠(Aaron Swartz)가 만들었다. 온갖 태그로 범벅된 HTML 문서 등과 달리, 읽기도 쓰기도 쉬운">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/markdown.png">
+<meta property="og:updated_time" content="2021-11-13T10:48:21.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="마크다운 (markdown)">
+<meta name="twitter:description" content="마크다운 (markdown) github 블로그 페이지에 글을 작성하기 위해서는 먼저 마크다운의 기본적인 사용법을 익혀야 합니다.  1.마크다운이란? 마크다운 (Markdown)은 마크업 언어의 일종으로, 존 그루버(John Gruber)와 아론 스워츠(Aaron Swartz)가 만들었다. 온갖 태그로 범벅된 HTML 문서 등과 달리, 읽기도 쓰기도 쉬운">
+<meta name="twitter:image" content="http://yoursite.com/images/markdown.png">
+    
+
+    
+        <link rel="alternate" href="http://www.pntbiz.co.kr/" title="People and Technology" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">피플앤드테크놀러지 기술 블로그 / Tech Blog</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/">IT Tech</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/1-iot/">1. IoT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/3-react/">3. React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/4-java/">4. Java</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/9-etc/">9. etc</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/">Recruit</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/it-tech/9-etc/">9. etc</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-markdown" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        마크다운 (markdown)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/10/09/markdown/" class="article-date">
+            <time datetime="2019-10-09T05:27:53.000Z" itemprop="datePublished">2019-10-09</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/markdown/">markdown</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="마크다운-markdown"><a href="#마크다운-markdown" class="headerlink" title="마크다운 (markdown)"></a>마크다운 (markdown)</h2><ul>
+<li>github 블로그 페이지에 글을 작성하기 위해서는 먼저 마크다운의 기본적인 사용법을 익혀야 합니다.</li>
+</ul>
+<h4 id="1-마크다운이란"><a href="#1-마크다운이란" class="headerlink" title="1.마크다운이란?"></a>1.마크다운이란?</h4><ul>
+<li>마크다운 (Markdown)은 마크업 언어의 일종으로, 존 그루버(John Gruber)와 아론 스워츠(Aaron Swartz)가 만들었다. 온갖 태그로 범벅된 HTML 문서 등과 달리, 읽기도 쓰기도 쉬운 문서 양식을 지향한다. 그루버는 마크다운으로 작성한 문서를 HTML로 변환하는 펄 스크립트도 만들었다. 확장자는 .md 또는 .markdown을 쓰지만, 전자가 압도적으로 많이 쓰인다.</li>
+</ul>
+<h5 id="1-1-장점"><a href="#1-1-장점" class="headerlink" title="1.1 장점"></a>1.1 장점</h5><ol>
+<li>문법이 쉽다.</li>
+<li>관리가 쉽다.</li>
+<li>지원 가능한 플랫폼과 프로그램이 많다.</li>
+</ol>
+<h5 id="1-2-단점"><a href="#1-2-단점" class="headerlink" title="1.2 단점"></a>1.2 단점</h5><ol>
+<li>표준이 없어서 사용자마다 문법이 상이하다.</li>
+<li>모든 HTML 마크업을 대신하지 못한다.</li>
+</ol>
+<h4 id="2-문법"><a href="#2-문법" class="headerlink" title="2.문법"></a>2.문법</h4><h5 id="2-1-문단-제목"><a href="#2-1-문단-제목" class="headerlink" title="2.1 문단 제목"></a>2.1 문단 제목</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 제목1</span><br><span class="line">## 제목2</span><br><span class="line">### 제목3</span><br><span class="line">#### 제목4</span><br><span class="line">##### 제목5</span><br><span class="line">###### 제목6</span><br></pre></td></tr></table></figure>
+
+<p>또는 다음과 같이 사용할수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1단계 제목</span><br><span class="line">=======</span><br><span class="line">2단계 제목</span><br><span class="line">------</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-문단"><a href="#2-2-문단" class="headerlink" title="2.2 문단"></a>2.2 문단</h5><ul>
+<li>문단을 나누기 위해서는 줄바꿈을 두번 하면 된다.</li>
+</ul>
+<h5 id="2-3-목록"><a href="#2-3-목록" class="headerlink" title="2.3 목록"></a>2.3 목록</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* 목록 하나</span><br><span class="line">* 목록 두울</span><br><span class="line">* 목록 세엣</span><br><span class="line">- 이렇게 써도</span><br><span class="line">- 된답니다.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>순서가 있는 목록은 다음과 같이 쓴다. 이 때, 숫자는 반드시 맞춰 쓸 필요는 없다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 첫째입니다.</span><br><span class="line">2. 둘째입니다.</span><br><span class="line">3. 셋째입니다.</span><br><span class="line">5. 넷째입니다. 다섯째 아닙니다.</span><br><span class="line">6. 이게 다섯째입니다.</span><br><span class="line">4. 이건 여섯째.</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-4-글자모양"><a href="#2-4-글자모양" class="headerlink" title="2.4 글자모양"></a>2.4 글자모양</h5><ul>
+<li>글자를 굵게 하려면 다음과 같이 사용합니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**굵게** 쓰거나 __두껍게__ 쓰거나</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>글자를 기울게 쓰려면 다음과 같이 사용합니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*기울게* 쓰면서 _기울게_ 쓴다</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-5-인라인-inline-코드-강조"><a href="#2-5-인라인-inline-코드-강조" class="headerlink" title="2.5 인라인(inline) 코드 강조"></a>2.5 인라인(inline) 코드 강조</h5><ul>
+<li>숫자 1번 키 왼쪽에 있는 `(Grave)를 입력하면 됩니다.</li>
+</ul>
+<h5 id="2-6-블록-block-코드-강조"><a href="#2-6-블록-block-코드-강조" class="headerlink" title="2.6 블록(block) 코드 강조"></a>2.6 블록(block) 코드 강조</h5><ul>
+<li>코드 첫 줄과 마지막 줄에 Back quote ( ` ) 또는 물결( ~ ) 3개를 삽입합니다.</li>
+</ul>
+<h5 id="2-6-인용문"><a href="#2-6-인용문" class="headerlink" title="2.6 인용문"></a>2.6 인용문</h5><ul>
+<li>줄 첫번째마다 &gt; 를 쓰면 된다. </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 인용</span><br><span class="line">&gt;&gt; 인용</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-7-링크"><a href="#2-7-링크" class="headerlink" title="2.7 링크"></a>2.7 링크</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[NAVER](https://naver.com &quot;링크 설명(title)을 작성하세요.&quot;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-8-그림-넣기"><a href="#2-8-그림-넣기" class="headerlink" title="2.8 그림 넣기"></a>2.8 그림 넣기</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">![깃허브][imgGithub]</span><br><span class="line"> </span><br><span class="line">[imgGithub]: https://guides.github.com/images/logo@2x.png &quot;설명문구&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-9-가로줄"><a href="#2-9-가로줄" class="headerlink" title="2.9 가로줄"></a>2.9 가로줄</h5><ul>
+<li>가로줄은 아래와 같이 사용합니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* * *</span><br><span class="line">***</span><br><span class="line">*****</span><br><span class="line">- - -</span><br><span class="line">------------</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>작성자 : 플랫폼 개발실</p>
+</blockquote>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a href="https://namu.wiki/w/마크다운" target="_blank" rel="noopener">나무위키</a></li>
+<li><a href="https://heropy.blog/2017/09/30/markdown/" target="_blank" rel="noopener">https://heropy.blog/2017/09/30/markdown/</a></li>
+<li><a href="https://how-to-use.tistory.com/2" target="_blank" rel="noopener">https://how-to-use.tistory.com/2</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/2019/10/09/markdown/" data-id="ckvxpxb71000caotia8161v6r" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "People and Technology"
+        },
+        "headline": "마크다운 (markdown)",
+        "image": "http://yoursite.com/images/markdown.png",
+        "keywords": "markdown",
+        "genre": "IT Tech 9. etc",
+        "datePublished": "2019-10-09",
+        "dateCreated": "2019-10-09",
+        "dateModified": "2021-11-13",
+        "url": "http://yoursite.com/2019/10/09/markdown/",
+        "description": "마크다운 (markdown)
+github 블로그 페이지에 글을 작성하기 위해서는 먼저 마크다운의 기본적인 사용법을 익혀야 합니다.
+
+1.마크다운이란?
+마크다운 (Markdown)은 마크업 언어의 일종으로, 존 그루버(John Gruber)와 아론 스워츠(Aaron Swartz)가 만들었다. 온갖 태그로 범벅된 HTML 문서 등과 달리, 읽기도 쓰기도 쉬운 ",
+        "wordCount": 399
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/pntkorea/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/company/people-and-technology" target="_blank" rel="noopener">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/channel/UCjta-QWjrvGLDS_BpyV3C2w" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/IndoorPlus" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="slideshare" href="https://www.slideshare.net/AntonioHong" target="_blank" rel="noopener">
+                        <i class="icon fa fa-slideshare"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="http://www.pntbiz.co.kr/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/10/12/hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Hexo로 블로그 만들기
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/10/09/recruit/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">플랫폼 개발실 - 플랫폼 엔지니어 채용</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/13/Kafka01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/kafka/kafka.png)" alt="카프카 1편 [구조 및 개념]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/4-java/">4. Java</a></p>
+                            <p class="item-title"><a href="/2021/11/13/Kafka01/" class="title">카프카 1편 [구조 및 개념]</a></p>
+                            <p class="item-date"><time datetime="2021-11-13T06:00:00.000Z" itemprop="datePublished">2021-11-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/09/influxDB-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/influxDB.png)" alt="InfluxDB-01 [살펴보기]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2021/10/09/influxDB-01/" class="title">InfluxDB-01 [살펴보기]</a></p>
+                            <p class="item-date"><time datetime="2021-10-09T05:56:55.000Z" itemprop="datePublished">2021-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/09/aws01_overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/aws/01/aws01_thumbnail.png)" alt="AWS 1편 [아마존 웹 서비스]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2020/08/09/aws01_overview/" class="title">AWS 1편 [아마존 웹 서비스]</a></p>
+                            <p class="item-date"><time datetime="2020-08-09T03:56:55.000Z" itemprop="datePublished">2020-08-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/05/react-hooks-chapter03-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-2부 [서버 연동]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/05/react-hooks-chapter03-2/" class="title">React-3-2부 [서버 연동]</a></p>
+                            <p class="item-date"><time datetime="2020-04-05T06:24:55.000Z" itemprop="datePublished">2020-04-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/04/react-hooks-chapter03-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-1부 [JWT와 React Router]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/04/react-hooks-chapter03-1/" class="title">React-3-1부 [JWT와 React Router]</a></p>
+                            <p class="item-date"><time datetime="2020-04-04T10:29:55.000Z" itemprop="datePublished">2020-04-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/">IT Tech</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/1-iot/">1. IoT</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/3-react/">3. React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/4-java/">4. Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/9-etc/">9. etc</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/">Recruit</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">AWS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/edge-computing/">Edge Computing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/influxdb/">InfluxDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iot/">IoT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lbs/">LBS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">Node.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pull-requests/">Pull requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtls/">RTLS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx/">VertX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beacon/">beacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dashboard/">dashboard</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-analysis/">data analysis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineer/">engineer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/">flutter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/platform/">platform</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recruit/">recruit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springBoot</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/aws/" style="font-size: 10px;">AWS</a> <a href="/tags/edge-computing/" style="font-size: 10px;">Edge Computing</a> <a href="/tags/influxdb/" style="font-size: 10px;">InfluxDB</a> <a href="/tags/iot/" style="font-size: 13.33px;">IoT</a> <a href="/tags/lbs/" style="font-size: 13.33px;">LBS</a> <a href="/tags/network/" style="font-size: 13.33px;">Network</a> <a href="/tags/node-js/" style="font-size: 13.33px;">Node.js</a> <a href="/tags/pull-requests/" style="font-size: 10px;">Pull requests</a> <a href="/tags/rtls/" style="font-size: 13.33px;">RTLS</a> <a href="/tags/vertx/" style="font-size: 13.33px;">VertX</a> <a href="/tags/beacon/" style="font-size: 10px;">beacon</a> <a href="/tags/dashboard/" style="font-size: 13.33px;">dashboard</a> <a href="/tags/data-analysis/" style="font-size: 13.33px;">data analysis</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/engineer/" style="font-size: 10px;">engineer</a> <a href="/tags/flutter/" style="font-size: 16.67px;">flutter</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/platform/" style="font-size: 10px;">platform</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/recruit/" style="font-size: 10px;">recruit</a> <a href="/tags/springboot/" style="font-size: 10px;">springBoot</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 People and Technology</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://yoursite.com/2019/10/09/markdown/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

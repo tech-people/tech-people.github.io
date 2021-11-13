@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>React-3-1부 [JWT와 React Router] | People and Technology</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="react">
+    
+    <meta name="description" content="작성자 : 플랫폼 개발실 R&amp;amp;D팀 유주빈  들어가기 앞서 본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅 및 상태관리에 대한 내용은 다루지 않습니다. 해당 내용은 아래의 링크를 참고해주세요.  React 1부 : 개발환경 구축하기React 2부 : 상태관리 본 글에서는 react를 활용하여 로그인 인증을 위해">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React-3-1부 [JWT와 React Router]">
+<meta property="og:url" content="http://yoursite.com/2020/04/04/react-hooks-chapter03-1/index.html">
+<meta property="og:site_name" content="People and Technology">
+<meta property="og:description" content="작성자 : 플랫폼 개발실 R&amp;amp;D팀 유주빈  들어가기 앞서 본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅 및 상태관리에 대한 내용은 다루지 않습니다. 해당 내용은 아래의 링크를 참고해주세요.  React 1부 : 개발환경 구축하기React 2부 : 상태관리 본 글에서는 react를 활용하여 로그인 인증을 위해">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/react-hooks.png">
+<meta property="og:updated_time" content="2021-11-13T10:48:21.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React-3-1부 [JWT와 React Router]">
+<meta name="twitter:description" content="작성자 : 플랫폼 개발실 R&amp;amp;D팀 유주빈  들어가기 앞서 본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅 및 상태관리에 대한 내용은 다루지 않습니다. 해당 내용은 아래의 링크를 참고해주세요.  React 1부 : 개발환경 구축하기React 2부 : 상태관리 본 글에서는 react를 활용하여 로그인 인증을 위해">
+<meta name="twitter:image" content="http://yoursite.com/images/react-hooks.png">
+    
+
+    
+        <link rel="alternate" href="http://www.pntbiz.co.kr/" title="People and Technology" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">피플앤드테크놀러지 기술 블로그 / Tech Blog</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/">IT Tech</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/1-iot/">1. IoT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/3-react/">3. React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/4-java/">4. Java</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/9-etc/">9. etc</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/">Recruit</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/it-tech/3-react/">3. React</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-react-hooks-chapter03-1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        React-3-1부 [JWT와 React Router]
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/04/04/react-hooks-chapter03-1/" class="article-date">
+            <time datetime="2020-04-04T10:29:55.000Z" itemprop="datePublished">2020-04-04</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/react/">react</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>작성자 : 플랫폼 개발실 R&amp;D팀 유주빈</p>
+</blockquote>
+<h2 id="들어가기-앞서"><a href="#들어가기-앞서" class="headerlink" title="들어가기 앞서"></a>들어가기 앞서</h2><ul>
+<li>본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅 및 상태관리에 대한 내용은 다루지 않습니다. 해당 내용은 아래의 링크를 참고해주세요.</li>
+</ul>
+<h6 id="React-1부-개발환경-구축하기"><a href="#React-1부-개발환경-구축하기" class="headerlink" title="React 1부 : 개발환경 구축하기"></a><a href="https://tech-people.github.io/2019/12/12/react-hooks-chapter01/" target="_blank" rel="noopener">React 1부 : 개발환경 구축하기</a></h6><h6 id="React-2부-상태관리"><a href="#React-2부-상태관리" class="headerlink" title="React 2부 : 상태관리"></a><a href="https://tech-people.github.io/2019/12/12/react-hooks-chapter02/" target="_blank" rel="noopener">React 2부 : 상태관리</a></h6><ul>
+<li>본 글에서는 react를 활용하여 로그인 인증을 위해 추가적으로 알아야 하는 JWT 및 React Router에 대해 알아보도록 하겠습니다.</li>
+</ul>
+<h2 id="로그인-및-인증"><a href="#로그인-및-인증" class="headerlink" title="로그인 및 인증"></a>로그인 및 인증</h2><ul>
+<li>웹 / 앱 개발을 하면 로그인과 관련되서 필연적으로 만나게 되는 개념이 쿠키와 세션입니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">쿠키 : 브라우저, 사용자의 컴퓨터(FRONT-END) 에 저장되는 데이터를 의미. 클라이언트 사이드에 있기 때문에 속도가 빠름</span><br><span class="line">세션 : &apos;시간&apos; 을 의미. 이 시간은 사용자와 서버(BACK-END)의 통신이 지속되는 시간을 의미함. 서버에 접속한 사용자별로 고유한 ID를 가진 세션이 생성됨. 서버측에 저장되기 때문에 보안이 쿠키에 비해 뛰어남.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>쿠키는 보안상의 문제로 적용하기가 쉽지 않고 세션의 경우 쿠키에 비해 보안이 안전하지만 서버쪽 부하가 증가하게 됩니다. 이 때문에 본 리액트 3부에서는 JWT를 활용하여 간단하게 로그인을 하는 실습을 진행할 것입니다.</li>
+</ul>
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><blockquote>
+<h4 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h4></blockquote>
+<ul>
+<li><p>JWT는 “JSON Web Token”의 약자이며 웹표준(RFC7519) 으로서 두 개체에서 JSON 객체를 사용하여 가볍고 자가수용적인(Self-Contained) 방식으로 정보를 전달할 수 있습니다.</p>
+</li>
+<li><p>자가 수용적이기 때문에 Token에 모든 정보를 지니고 있습니다. 그렇기 때문에 특별히 인증과 과련되서 토큰을 저장하거나 하는 부하를 줄일 수 있습니다.</p>
+</li>
+</ul>
+<blockquote>
+<h4 id="구조"><a href="#구조" class="headerlink" title="구조"></a>구조</h4></blockquote>
+<ul>
+<li>JWT (JSON Web Token)는 헤더(Header) ,내용(Payload) , 서명(Signature) 인 3가지 부분으로 나눠집니다.</li>
+</ul>
+<p><img src="/images/react/jwt_structure.png" alt="JSON Web Token 구조"></p>
+<blockquote>
+<h4 id="헤더-Header"><a href="#헤더-Header" class="headerlink" title="헤더(Header)"></a>헤더(Header)</h4></blockquote>
+<ul>
+<li>헤더는 typ와 alg라는 두가지 정보를 갖고 있습니다. 데이터의 예시는 아래와 같습니다. </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    typ : &quot;JWT&quot;</span><br><span class="line">    alg : &quot;HS256&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>typ : 토큰의 형식을 정보로 갖고 있습니다.</li>
+<li>alg : 해싱 알고리즘 정보를 갖고 있습니다. 대게 HMAC SHA256 혹은 RSA가 사용됩니다. 해당 알고리즘은 토큰을 검증할 때 사용되는 서명(Signature) 부분에 적용됩니다.</li>
+</ul>
+<blockquote>
+<h4 id="내용-Payload"><a href="#내용-Payload" class="headerlink" title="내용(Payload)"></a>내용(Payload)</h4></blockquote>
+<ul>
+<li><p>내용 부분은 토큰에 담을 정보가 들어가 있습니다. 정보는 name과 value의 한쌍으로 구분되며 이런 한 조각을 “클레임(claim)”이라고 일컫습니다.</p>
+</li>
+<li><p>클레임은 아래와 같이 3가지로 분류가 됩니다.</p>
+</li>
+</ul>
+<ol>
+<li>등록된 (registered) 클레임</li>
+<li>공개 (public) 클레임</li>
+<li>비공개 (private) 클레임</li>
+</ol>
+<blockquote>
+<h5 id="등록된-registered-클레임"><a href="#등록된-registered-클레임" class="headerlink" title="등록된 (registered) 클레임"></a>등록된 (registered) 클레임</h5></blockquote>
+<ul>
+<li>등록된 클레임은 토큰에 대한 정보를 지정하기 위해 이미 정해진 클레임입니다. 해당 클레임은 필수가 아닌 선택이며 항목들은 아래와 같습니다.</li>
+</ul>
+<ol>
+<li>iss: 토큰 발급자 (issuer)</li>
+<li>sub: 토큰 제목 (subject)</li>
+<li>aud: 토큰 대상자 (audience)</li>
+<li>exp: 토큰의 만료시간 (expiraton), NumericDate 형식이며 현재 시간보다 이후로 설정되어 있어야 합니다.</li>
+<li>nbf: Not Before 를 의미, 토큰의 활성화 시간입니다.NumericDate 형식이며 지정한 날짜가 지나기 전까지는 토큰이 처리되지 않습니다.</li>
+<li>iat: 토큰이 발급된 시간 (issued at)</li>
+<li>jti: JWT의 고유 식별자</li>
+</ol>
+<blockquote>
+<h5 id="공개-public-클레임"><a href="#공개-public-클레임" class="headerlink" title="공개 (public) 클레임"></a>공개 (public) 클레임</h5></blockquote>
+<ul>
+<li>공개 클레임은 서로 충돌이 일어나지 않도록 이름을 고유하게 갖고 있어야 합니다. 그래서 URL 형태로 작성을 합니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;http://pntbiz.co.kr&quot;: true &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h5 id="비공개-private-클레임"><a href="#비공개-private-클레임" class="headerlink" title="비공개 (private) 클레임"></a>비공개 (private) 클레임</h5></blockquote>
+<ul>
+<li>비공개 클레임은 대게 클라이언트와 서버에 약속된 클레임입니다. 이는 실제 사용을 하는 개발자가 지정하게 됩니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;comName&quot;: &quot;People and Technology&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>위의 3개의 클레임을 이용하여 내용(Payload)를 작성하였을 때 아래와 같은 예시가 나옵니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;iss&quot;: &quot;pntbiz.co.kr&quot;,</span><br><span class="line">    &quot;exp&quot;: &quot;1485270000000&quot;,</span><br><span class="line">    &quot;http://pntbiz.co.kr&quot;: true,</span><br><span class="line">    &quot;comName&quot;: &quot;People and Technology&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h4 id="서명-Signature"><a href="#서명-Signature" class="headerlink" title="서명(Signature)"></a>서명(Signature)</h4></blockquote>
+<ul>
+<li>JSON Web Token 의 마지막 부분으로 서명(signature)은 헤더(Header)의 인코딩값과, 내용(Payload)의 인코딩값을 합친후 주어진 비밀키로 해쉬를 하여 생성합니다.</li>
+</ul>
+<blockquote>
+<h4 id="JWT-마무리"><a href="#JWT-마무리" class="headerlink" title="JWT 마무리"></a>JWT 마무리</h4></blockquote>
+<ul>
+<li><p>이러한 JWT를 통해 별도의 토큰과 관련된 저장소 및 부하를 만들지 않고 토큰으로 인증을 할 수 있습니다. 그러나 이것이 장점만을 갖고 있는 것은 아닙니다. 장단점의 요약은 아래와 같습니다.</p>
+</li>
+<li><p>JWT 장점</p>
+</li>
+</ul>
+<ol>
+<li>URL  파라미터와 헤더로 사용</li>
+<li>수평 스케일이 용이</li>
+<li>REST 서비스로 제공 가능</li>
+<li>내장된 만료</li>
+<li>독립적인 JWT</li>
+</ol>
+<ul>
+<li>JWT 단점</li>
+</ul>
+<ol>
+<li>내용(Payload)은 암호화되지 않기에 담는 데이터 내용이 제한적</li>
+<li>클레임이 많을 수록 토큰의 길이가 길어짐</li>
+<li>한 번 발급한 Token을 만료되기 전에 폐기가 어려움</li>
+</ol>
+<h2 id="React-Router"><a href="#React-Router" class="headerlink" title="React Router"></a>React Router</h2><h6 id="기본적인-react-환경과-관련된-모듈은-설치되어-있다는-가정하에-내용이-진행됩니다"><a href="#기본적인-react-환경과-관련된-모듈은-설치되어-있다는-가정하에-내용이-진행됩니다" class="headerlink" title="기본적인 react 환경과 관련된 모듈은 설치되어 있다는 가정하에 내용이 진행됩니다."></a>기본적인 react 환경과 관련된 모듈은 설치되어 있다는 가정하에 내용이 진행됩니다.</h6><ul>
+<li>React Router는 SPA 어플리케이션의 라우팅 문제를 해결하기 위해 react 진영에서 거의 표준처럼 사용되고 있는 네비게이션 라이브러리입니다. 이는 브라우저의 내장 API인 location과 history와도 연동이 됩니다.</li>
+</ul>
+<blockquote>
+<h4 id="React-Router-모듈-설치"><a href="#React-Router-모듈-설치" class="headerlink" title="React Router 모듈 설치"></a>React Router 모듈 설치</h4></blockquote>
+<ul>
+<li>React Router를 사용하기 위해 아래의 모듈을 설치합니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i react-router-dom</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h4 id="React-Router-주요-컴포넌트"><a href="#React-Router-주요-컴포넌트" class="headerlink" title="React Router 주요 컴포넌트"></a>React Router 주요 컴포넌트</h4></blockquote>
+<ul>
+<li>React Router를 활용하여 프로그램을 작성하기 전에 주요한 컴포넌트들에 대해 한번 살펴보도록 하겠습니다.</li>
+</ul>
+<blockquote>
+<h5 id="Link-컴포넌트"><a href="#Link-컴포넌트" class="headerlink" title="Link 컴포넌트"></a>Link 컴포넌트</h5></blockquote>
+<ul>
+<li><p>Link 컴포넌트는 <a> 태그와 유사하게 브라우저를 href 속성을 통해 URL 변경하여 이동시키 듯이 <link> 컴포넌트는 to라는 prop을 통해 이동할 URL을 지정합니다.  </a></p>
+</li>
+<li><p>코드상에서 사용 예시는 아래와 같습니다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link to=&quot;/pntbiz&quot;&gt;피플앤드테크놀러지&lt;/Link&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h5 id="Route-컴포넌트"><a href="#Route-컴포넌트" class="headerlink" title="Route 컴포넌트"></a>Route 컴포넌트</h5></blockquote>
+<ul>
+<li><p>Route 컴포넌트는 브라우저의 URL과 일치하는 컴퓨넌트를 브라우저에 렌더링 할 수 있도록 지정합니다. path라는 prop을 통해서 경로를 지정하며 component 라는 prop을 통해 렌더링 될 컴포넌트를 지정합니다.</p>
+</li>
+<li><p>코드상에서 사용 예시는 아래와 같습니다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=&quot;/pntbiz&quot; component=&#123;Pnt&#125; /&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h5 id="Redirect-컴포넌트"><a href="#Redirect-컴포넌트" class="headerlink" title="Redirect 컴포넌트"></a>Redirect 컴포넌트</h5></blockquote>
+<ul>
+<li><p>Redirect 컴포넌트는 브라우저의 경로를 변경시켜 주는 컴포넌트입니다. to라는 prop을 통해 변경할 경로를 지정할 수 있습니다.</p>
+</li>
+<li><p>코드상에서 사용 예시는 아래와 같습니다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Redirect to=&quot;/login&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h3><ul>
+<li><p>이상으로 다음편에서 진행할 react로 로그인 구현하기와 관련되서 미리 알아야 할 내용에 대해 알아 보았습니다.</p>
+</li>
+<li><p>지금까지 실습한 내용을 토대로 간단하게 로그인을 구현해보는 시간을 갖도록 하겠습니다. </p>
+</li>
+</ul>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a href="https://www.npmjs.com/package/jsonwebtoken" target="_blank" rel="noopener">https://www.npmjs.com/package/jsonwebtoken</a></li>
+<li><a href="https://velopert.com/2448" target="_blank" rel="noopener">https://velopert.com/2448</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/2020/04/04/react-hooks-chapter03-1/" data-id="ckvxpxb74000faoti60lmyzlx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "People and Technology"
+        },
+        "headline": "React-3-1부 [JWT와 React Router]",
+        "image": "http://yoursite.com/images/react-hooks.png",
+        "keywords": "react",
+        "genre": "IT Tech 3. React",
+        "datePublished": "2020-04-04",
+        "dateCreated": "2020-04-04",
+        "dateModified": "2021-11-13",
+        "url": "http://yoursite.com/2020/04/04/react-hooks-chapter03-1/",
+        "description": "
+작성자 : 플랫폼 개발실 R&amp;D팀 유주빈
+
+들어가기 앞서
+본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅 및 상태관리에 대한 내용은 다루지 않습니다. 해당 내용은 아래의 링크를 참고해주세요.
+
+React 1부 : 개발환경 구축하기React 2부 : 상태관리
+본 글에서는 react를 활용하여 로그인 인증을 위해",
+        "wordCount": 843
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/pntkorea/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/company/people-and-technology" target="_blank" rel="noopener">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/channel/UCjta-QWjrvGLDS_BpyV3C2w" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/IndoorPlus" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="slideshare" href="https://www.slideshare.net/AntonioHong" target="_blank" rel="noopener">
+                        <i class="icon fa fa-slideshare"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="http://www.pntbiz.co.kr/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/04/05/react-hooks-chapter03-2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            React-3-2부 [서버 연동]
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/03/25/edge_computing/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">엣지 컴퓨팅(Edge Computing)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/13/Kafka01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/kafka/kafka.png)" alt="카프카 1편 [구조 및 개념]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/4-java/">4. Java</a></p>
+                            <p class="item-title"><a href="/2021/11/13/Kafka01/" class="title">카프카 1편 [구조 및 개념]</a></p>
+                            <p class="item-date"><time datetime="2021-11-13T06:00:00.000Z" itemprop="datePublished">2021-11-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/09/influxDB-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/influxDB.png)" alt="InfluxDB-01 [살펴보기]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2021/10/09/influxDB-01/" class="title">InfluxDB-01 [살펴보기]</a></p>
+                            <p class="item-date"><time datetime="2021-10-09T05:56:55.000Z" itemprop="datePublished">2021-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/09/aws01_overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/aws/01/aws01_thumbnail.png)" alt="AWS 1편 [아마존 웹 서비스]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2020/08/09/aws01_overview/" class="title">AWS 1편 [아마존 웹 서비스]</a></p>
+                            <p class="item-date"><time datetime="2020-08-09T03:56:55.000Z" itemprop="datePublished">2020-08-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/05/react-hooks-chapter03-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-2부 [서버 연동]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/05/react-hooks-chapter03-2/" class="title">React-3-2부 [서버 연동]</a></p>
+                            <p class="item-date"><time datetime="2020-04-05T06:24:55.000Z" itemprop="datePublished">2020-04-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/04/react-hooks-chapter03-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-1부 [JWT와 React Router]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/04/react-hooks-chapter03-1/" class="title">React-3-1부 [JWT와 React Router]</a></p>
+                            <p class="item-date"><time datetime="2020-04-04T10:29:55.000Z" itemprop="datePublished">2020-04-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/">IT Tech</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/1-iot/">1. IoT</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/3-react/">3. React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/4-java/">4. Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/9-etc/">9. etc</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/">Recruit</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">AWS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/edge-computing/">Edge Computing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/influxdb/">InfluxDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iot/">IoT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lbs/">LBS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">Node.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pull-requests/">Pull requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtls/">RTLS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx/">VertX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beacon/">beacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dashboard/">dashboard</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-analysis/">data analysis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineer/">engineer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/">flutter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/platform/">platform</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recruit/">recruit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springBoot</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/aws/" style="font-size: 10px;">AWS</a> <a href="/tags/edge-computing/" style="font-size: 10px;">Edge Computing</a> <a href="/tags/influxdb/" style="font-size: 10px;">InfluxDB</a> <a href="/tags/iot/" style="font-size: 13.33px;">IoT</a> <a href="/tags/lbs/" style="font-size: 13.33px;">LBS</a> <a href="/tags/network/" style="font-size: 13.33px;">Network</a> <a href="/tags/node-js/" style="font-size: 13.33px;">Node.js</a> <a href="/tags/pull-requests/" style="font-size: 10px;">Pull requests</a> <a href="/tags/rtls/" style="font-size: 13.33px;">RTLS</a> <a href="/tags/vertx/" style="font-size: 13.33px;">VertX</a> <a href="/tags/beacon/" style="font-size: 10px;">beacon</a> <a href="/tags/dashboard/" style="font-size: 13.33px;">dashboard</a> <a href="/tags/data-analysis/" style="font-size: 13.33px;">data analysis</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/engineer/" style="font-size: 10px;">engineer</a> <a href="/tags/flutter/" style="font-size: 16.67px;">flutter</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/platform/" style="font-size: 10px;">platform</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/recruit/" style="font-size: 10px;">recruit</a> <a href="/tags/springboot/" style="font-size: 10px;">springBoot</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 People and Technology</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://yoursite.com/2020/04/04/react-hooks-chapter03-1/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

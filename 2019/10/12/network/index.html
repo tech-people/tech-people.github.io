@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Network Engine 1부 | People and Technology</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Network,IoT,RTLS,LBS,VertX,Node.js">
+    
+    <meta name="description" content="IoT 에서의 네트워크 엔진 작성자 : 플랫폼 개발실 실장 김완철(David Kim)  1. 개요 인터넷이 보편화된 시점부터 지금까지 데이터 처리에 대한 관심과 이슈는 언제나 있어 왔다. 인터넷의 속도가 느렸던 과거에는 데이터량와 처리속도에 대한 이슈가 그다지 많지는 않았지만, 에러없이 데이터 처리를 하고자 하는 생각은 속도와 데이터량에 상관없이 주요 관심">
+<meta name="keywords" content="Network,IoT,RTLS,LBS,VertX,Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Network Engine 1부">
+<meta property="og:url" content="http://yoursite.com/2019/10/12/network/index.html">
+<meta property="og:site_name" content="People and Technology">
+<meta property="og:description" content="IoT 에서의 네트워크 엔진 작성자 : 플랫폼 개발실 실장 김완철(David Kim)  1. 개요 인터넷이 보편화된 시점부터 지금까지 데이터 처리에 대한 관심과 이슈는 언제나 있어 왔다. 인터넷의 속도가 느렸던 과거에는 데이터량와 처리속도에 대한 이슈가 그다지 많지는 않았지만, 에러없이 데이터 처리를 하고자 하는 생각은 속도와 데이터량에 상관없이 주요 관심">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/network.jpg">
+<meta property="og:updated_time" content="2021-11-13T10:48:21.526Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Network Engine 1부">
+<meta name="twitter:description" content="IoT 에서의 네트워크 엔진 작성자 : 플랫폼 개발실 실장 김완철(David Kim)  1. 개요 인터넷이 보편화된 시점부터 지금까지 데이터 처리에 대한 관심과 이슈는 언제나 있어 왔다. 인터넷의 속도가 느렸던 과거에는 데이터량와 처리속도에 대한 이슈가 그다지 많지는 않았지만, 에러없이 데이터 처리를 하고자 하는 생각은 속도와 데이터량에 상관없이 주요 관심">
+<meta name="twitter:image" content="http://yoursite.com/images/network.jpg">
+    
+
+    
+        <link rel="alternate" href="http://www.pntbiz.co.kr/" title="People and Technology" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">피플앤드테크놀러지 기술 블로그 / Tech Blog</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/">IT Tech</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/1-iot/">1. IoT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/3-react/">3. React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/4-java/">4. Java</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/9-etc/">9. etc</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/">Recruit</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/it-tech/1-iot/">1. IoT</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-network" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Network Engine 1부
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/10/12/network/" class="article-date">
+            <time datetime="2019-10-12T07:15:30.000Z" itemprop="datePublished">2019-10-12</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/iot/">IoT</a>, <a class="tag-link" href="/tags/lbs/">LBS</a>, <a class="tag-link" href="/tags/network/">Network</a>, <a class="tag-link" href="/tags/node-js/">Node.js</a>, <a class="tag-link" href="/tags/rtls/">RTLS</a>, <a class="tag-link" href="/tags/vertx/">VertX</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="IoT-에서의-네트워크-엔진"><a href="#IoT-에서의-네트워크-엔진" class="headerlink" title="IoT 에서의 네트워크 엔진"></a>IoT 에서의 네트워크 엔진</h3><blockquote>
+<p>작성자 : 플랫폼 개발실 실장 김완철(David Kim)</p>
+</blockquote>
+<h4 id="1-개요"><a href="#1-개요" class="headerlink" title="1. 개요"></a>1. 개요</h4><ul>
+<li>인터넷이 보편화된 시점부터 지금까지 데이터 처리에 대한 관심과 이슈는 언제나 있어 왔다. 인터넷의 속도가 느렸던 과거에는 데이터량와 처리속도에 대한 이슈가 그다지 많지는 않았지만, 에러없이 데이터 처리를 하고자 하는 생각은 속도와 데이터량에 상관없이 주요 관심사였다. 5G로 가고 있는 현시점도 마찬가지로 속도와 데이터량에 대한 관심은 실시간으로 데이터를 처리하는 솔루션 특히 서비스파트에서 많이 관심을 보이고 있다.</li>
+</ul>
+<h5 id="1-1-데이터-수집"><a href="#1-1-데이터-수집" class="headerlink" title="1.1. 데이터 수집"></a>1.1. 데이터 수집</h5><ul>
+<li>데이터 수집이란 말은 쉽게 생각하면, 그냥 저절로 들어오는 데이터를 모으는 행위 또는 특정한 장소에 저장되어 있는 데이터를 가져와서 저장하는 개념이 포함되어 있다. 데이터 수집은 초기 인터넷 서비스부터 회원가입이라는 개념이 있는 그 시점부터 당연스럽게 생겼던 개념이다. 초고속 인터넷망이 보편화된 현재에도 데이터 수집은 지속적으로 이루어져 왔고, 특히 빠르고, 네트워크망에 부담없이 데이터를 수집할지에 대한 고민은 여전히 숙제로 남아 있다.</li>
+</ul>
+<h5 id="1-2-데이터-가공"><a href="#1-2-데이터-가공" class="headerlink" title="1.2. 데이터 가공"></a>1.2. 데이터 가공</h5><ul>
+<li>데이터를 수집하고, 특정 위치에 저장하고, 해당 데이터를 읽는 행위는 데이터를 수집하는 솔루션 특히 서비스업체에서는 당연한 업무이며, 비즈니스의 한 부분이라는것에는 이견이 없다. 하지만, 가공이라는 역할은 그리 쉽지 않는 업무프로세스이다. 특히 쓰레기 데이터가 들어오면 결과물도 쓰레기라는 얘기가 있듯이, 가공하는 그 시점에 어떤 데이터를 선별하고 어떤 데이터를 이쁘게 가공할지에 대한 고민은 한순간의 문제로 끝나지 않는다.</li>
+</ul>
+<h5 id="1-3-데이터-분석"><a href="#1-3-데이터-분석" class="headerlink" title="1.3. 데이터 분석"></a>1.3. 데이터 분석</h5><ul>
+<li>데이터가 가공이 되면, 그 다음 프로세스로 가공된 데이터를 필요한 요건에 맞게 분석하는 일이다. 데이터 분석이 반드시 인사이트(insight) 있는 리포트를 생산하는 업무라기 보다는, 리포트를 만들수 있도록 그 전단계까지 데이터 자체를 분석하는것도 이 범위에 속한다고 생각한다. 업무 범위나 프로세스에는 충분히 이견이 있을수 있다고 생각한다. 분석단계가 데이터 처리의 마지막이라고 생각하는 경우가 보편적이기 때문이다. 하지만 내가 생각하는 분석과 인사이트(insight)는 특정한 업무범위나 분석능력 그리고 특정 도메인에 정통한 사람이 있느냐 없느냐에 따른 분석과 인사이트(insight) 업무가 분리된다고 생각한다. </li>
+</ul>
+<h5 id="1-4-데이터-인사이트-insight"><a href="#1-4-데이터-인사이트-insight" class="headerlink" title="1.4. 데이터 인사이트(insight)"></a>1.4. 데이터 인사이트(insight)</h5><ul>
+<li>가공 및 분석된 데이터를 특정 도메인에 정통한 멤버가 우리가 보지 못한, 또는 우리가 분석하지 못한 내용을 도출하는 액션 또는 업무프로세스가 데이터 인사이트라고 생각한다. 데이터는 누구나 수집하고 가공하고 분석할수는 있으나 그것을 가지고, 미래에 대한 예측, 예견 또는 현재의 문제점을 파악하고 도출해내는 행위야 말로 데이터 인사이트라는 용어를 붙일수 있다고 생각한다. 이 프로세스 역시 여러가지 이견이 있을수 있지만, 본인이 생각하는 것이 분석과 인사이트는 엄연히 다르다고 생각한다.</li>
+</ul>
+<h4 id="2-IoT-에서의-데이터-수집"><a href="#2-IoT-에서의-데이터-수집" class="headerlink" title="2. IoT 에서의 데이터 수집"></a>2. IoT 에서의 데이터 수집</h4><h5 id="2-1-디바이스"><a href="#2-1-디바이스" class="headerlink" title="2.1. 디바이스"></a>2.1. 디바이스</h5><ul>
+<li>IoT 란 Internet of Things 의 약자로 말 그대로 어떠한 물건(에셋)에 인터넷이 결합된 것을 의미한다. 최근 4차 산업이라고 불리우는 것들중 IoT 는 빠지지 않고 단골손님처럼 회자된다. 물건하나 하나를 인터넷 망이라는 또는 무선망으로 연결한다며, 그 연결 과정에서 나오는 데이터 특히 IoT 제품(상품) 이라고 보편적으로 불리고 있는 인터넷 연결이 가능한 세탁기나 공기청정기 같은 전자제품에서 특정 서버로 데이터를 전송하게 된다면, 엄청난 데이터가 수집이 가능해지게 된다. 하지만, 인터넷 연결이 불가능한 디바이스도 존재하기 때문에, 데이터 전송을 위한 보완책이 필수적으로 마련되어야 한다. </li>
+</ul>
+<h5 id="2-2-디바이스-서버-게이트웨이-브릿지"><a href="#2-2-디바이스-서버-게이트웨이-브릿지" class="headerlink" title="2.2. 디바이스 서버 게이트웨이(브릿지)"></a>2.2. 디바이스 서버 게이트웨이(브릿지)</h5><ul>
+<li>인터넷망으로 연결된 IoT 제품의 경우는 서버로 특정한 데이터를 전송할수 있는 기본적인 구성은 되어 있다. 하지만, 인터넷이 가능하도록 부품을 심기 힘든 디바이스 특히 비컨이나 센서와 같은 작은 사이즈의 디바이스는 데이터를 서버로 보낼수 있는 방법이 쉽지가 않다. 이런한 문제를 해결하기 위해 브릿지 또는 게이트웨이라는 디바이스를 가지고, 작은 사이즈의 센서나 비컨들의 데이터를 서버로 전송하게 된다. 참고 :  <a href="http://pntbiz.co.kr/index.php/home/product/indoorplus-rtls-hw/" target="_blank" rel="noopener">게이트웨이(브릿지)</a></li>
+</ul>
+<h5 id="2-3-데이터-수집-서버-클라우드"><a href="#2-3-데이터-수집-서버-클라우드" class="headerlink" title="2.3 데이터 수집 서버(클라우드)"></a>2.3 데이터 수집 서버(클라우드)</h5><ul>
+<li>원하는 데이터를 수집하기 위해서는 어딘가에는 저장을 해야 한다. 대부분은 데이터베이스라는 전통적인 RDB를 이용하게 된다. 인터넷이 발달하기 시작한 시점의 인터넷 서비스 또는 솔루션에서는 RDB(오라클, MSSQL, MYSQL)는 매우 유용한 없어서는 안될 신과 같은 존재였다. 요즘도 마찬가지로 반드시 있어야 하는 애플리케이션이다. 하지만, 최근들어 인터넷 속도가 빨라지고, IoT 라는 디바이스에서 수집되는 데이터 그리고, 인터넷 역사에 길어짐에 따라 엄청나게 축된 데이터들 처리하기 위해서는 전통적인 아키텍처 또는 전통적인 애플리케이션으로는 해결하기 쉽지가 않다. 한가지 예로, 어느순간 예상치 못하게 수집되는 데이터량이 폭발적으로 늘어나거나, 데이터 처리를 위한 프로세스가 길어짐에 따라 컴퓨팅 리소스가 부족하게 되는 기존에 예상하지도 않았던 것들이 나타나고 있다</li>
+</ul>
+<ul>
+<li>이와 같은 경우는 전통적인 방식 또는 아키텍처 또는 생각으로는 해결할 수가 없다. NoSQL 또는 유연하게 확장이 가능한 아키텍처 구성 또는 데이터를 수집하고 처리할수 있는 애플리케이션(네트워크 엔진)의 성능이 엄청난 데이터를 흘려다니는 현대에는 반드시 필요한 기본 필수 요건이 되어 가고 있다. </li>
+</ul>
+<h5 id="다음글-2부-보기"><a href="#다음글-2부-보기" class="headerlink" title="다음글 : 2부 보기"></a>다음글 : <a href="/2019/10/12/network2/">2부 보기</a></h5><blockquote>
+<p>본 내용은 작성자 개인적인 의견입니다. 다른 의견이 있으시면, 피드백 환영합니다.</p>
+</blockquote>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/2019/10/12/network/" data-id="ckvxpxb75000haoti2lnm93uq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "People and Technology"
+        },
+        "headline": "Network Engine 1부",
+        "image": "http://yoursite.com/images/network.jpg",
+        "keywords": "Network IoT RTLS LBS VertX Node.js",
+        "genre": "IT Tech 1. IoT",
+        "datePublished": "2019-10-12",
+        "dateCreated": "2019-10-12",
+        "dateModified": "2021-11-13",
+        "url": "http://yoursite.com/2019/10/12/network/",
+        "description": "IoT 에서의 네트워크 엔진
+작성자 : 플랫폼 개발실 실장 김완철(David Kim)
+
+1. 개요
+인터넷이 보편화된 시점부터 지금까지 데이터 처리에 대한 관심과 이슈는 언제나 있어 왔다. 인터넷의 속도가 느렸던 과거에는 데이터량와 처리속도에 대한 이슈가 그다지 많지는 않았지만, 에러없이 데이터 처리를 하고자 하는 생각은 속도와 데이터량에 상관없이 주요 관심",
+        "wordCount": 667
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/pntkorea/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/company/people-and-technology" target="_blank" rel="noopener">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/channel/UCjta-QWjrvGLDS_BpyV3C2w" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/IndoorPlus" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="slideshare" href="https://www.slideshare.net/AntonioHong" target="_blank" rel="noopener">
+                        <i class="icon fa fa-slideshare"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="http://www.pntbiz.co.kr/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/10/12/network2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Network Engine 2부
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/10/12/hexo-pr/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">깃허브 블로그 협업하기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/13/Kafka01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/kafka/kafka.png)" alt="카프카 1편 [구조 및 개념]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/4-java/">4. Java</a></p>
+                            <p class="item-title"><a href="/2021/11/13/Kafka01/" class="title">카프카 1편 [구조 및 개념]</a></p>
+                            <p class="item-date"><time datetime="2021-11-13T06:00:00.000Z" itemprop="datePublished">2021-11-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/09/influxDB-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/influxDB.png)" alt="InfluxDB-01 [살펴보기]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2021/10/09/influxDB-01/" class="title">InfluxDB-01 [살펴보기]</a></p>
+                            <p class="item-date"><time datetime="2021-10-09T05:56:55.000Z" itemprop="datePublished">2021-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/09/aws01_overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/aws/01/aws01_thumbnail.png)" alt="AWS 1편 [아마존 웹 서비스]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2020/08/09/aws01_overview/" class="title">AWS 1편 [아마존 웹 서비스]</a></p>
+                            <p class="item-date"><time datetime="2020-08-09T03:56:55.000Z" itemprop="datePublished">2020-08-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/05/react-hooks-chapter03-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-2부 [서버 연동]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/05/react-hooks-chapter03-2/" class="title">React-3-2부 [서버 연동]</a></p>
+                            <p class="item-date"><time datetime="2020-04-05T06:24:55.000Z" itemprop="datePublished">2020-04-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/04/react-hooks-chapter03-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-1부 [JWT와 React Router]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/04/react-hooks-chapter03-1/" class="title">React-3-1부 [JWT와 React Router]</a></p>
+                            <p class="item-date"><time datetime="2020-04-04T10:29:55.000Z" itemprop="datePublished">2020-04-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/">IT Tech</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/1-iot/">1. IoT</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/3-react/">3. React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/4-java/">4. Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/9-etc/">9. etc</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/">Recruit</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">AWS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/edge-computing/">Edge Computing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/influxdb/">InfluxDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iot/">IoT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lbs/">LBS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">Node.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pull-requests/">Pull requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtls/">RTLS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx/">VertX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beacon/">beacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dashboard/">dashboard</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-analysis/">data analysis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineer/">engineer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/">flutter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/platform/">platform</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recruit/">recruit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springBoot</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/aws/" style="font-size: 10px;">AWS</a> <a href="/tags/edge-computing/" style="font-size: 10px;">Edge Computing</a> <a href="/tags/influxdb/" style="font-size: 10px;">InfluxDB</a> <a href="/tags/iot/" style="font-size: 13.33px;">IoT</a> <a href="/tags/lbs/" style="font-size: 13.33px;">LBS</a> <a href="/tags/network/" style="font-size: 13.33px;">Network</a> <a href="/tags/node-js/" style="font-size: 13.33px;">Node.js</a> <a href="/tags/pull-requests/" style="font-size: 10px;">Pull requests</a> <a href="/tags/rtls/" style="font-size: 13.33px;">RTLS</a> <a href="/tags/vertx/" style="font-size: 13.33px;">VertX</a> <a href="/tags/beacon/" style="font-size: 10px;">beacon</a> <a href="/tags/dashboard/" style="font-size: 13.33px;">dashboard</a> <a href="/tags/data-analysis/" style="font-size: 13.33px;">data analysis</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/engineer/" style="font-size: 10px;">engineer</a> <a href="/tags/flutter/" style="font-size: 16.67px;">flutter</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/platform/" style="font-size: 10px;">platform</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/recruit/" style="font-size: 10px;">recruit</a> <a href="/tags/springboot/" style="font-size: 10px;">springBoot</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 People and Technology</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://yoursite.com/2019/10/12/network/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

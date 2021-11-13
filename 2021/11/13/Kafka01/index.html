@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>카프카 1편 [구조 및 개념] | People and Technology</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="kafka">
+    
+    <meta name="description" content="해당 글은 API 문서에 대한 독해 및 개인공부 글입니다. 따라서 개인적인 해석이 있을 수 있습니다.  1. 이벤트 스트리밍(event streaming)스트리밍(streaming) 이란 무엇일까? 스트리밍(streaming)은 ‘흐름’ 이라는 뜻으로 데이터가 흐른다는 뜻에서 사용하는 용어이다. 이러한 ‘흐름’을 통해 원하는 데이터를 보내기도 하고 받기도">
+<meta name="keywords" content="kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="카프카 1편 [구조 및 개념]">
+<meta property="og:url" content="http://yoursite.com/2021/11/13/Kafka01/index.html">
+<meta property="og:site_name" content="People and Technology">
+<meta property="og:description" content="해당 글은 API 문서에 대한 독해 및 개인공부 글입니다. 따라서 개인적인 해석이 있을 수 있습니다.  1. 이벤트 스트리밍(event streaming)스트리밍(streaming) 이란 무엇일까? 스트리밍(streaming)은 ‘흐름’ 이라는 뜻으로 데이터가 흐른다는 뜻에서 사용하는 용어이다. 이러한 ‘흐름’을 통해 원하는 데이터를 보내기도 하고 받기도">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/kafka/kafka.png">
+<meta property="og:updated_time" content="2021-11-13T11:14:04.150Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="카프카 1편 [구조 및 개념]">
+<meta name="twitter:description" content="해당 글은 API 문서에 대한 독해 및 개인공부 글입니다. 따라서 개인적인 해석이 있을 수 있습니다.  1. 이벤트 스트리밍(event streaming)스트리밍(streaming) 이란 무엇일까? 스트리밍(streaming)은 ‘흐름’ 이라는 뜻으로 데이터가 흐른다는 뜻에서 사용하는 용어이다. 이러한 ‘흐름’을 통해 원하는 데이터를 보내기도 하고 받기도">
+<meta name="twitter:image" content="http://yoursite.com/images/kafka/kafka.png">
+    
+
+    
+        <link rel="alternate" href="http://www.pntbiz.co.kr/" title="People and Technology" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">피플앤드테크놀러지 기술 블로그 / Tech Blog</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/">IT Tech</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/1-iot/">1. IoT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/3-react/">3. React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/4-java/">4. Java</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/9-etc/">9. etc</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/">Recruit</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/it-tech/4-java/">4. Java</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Kafka01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        카프카 1편 [구조 및 개념]
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2021/11/13/Kafka01/" class="article-date">
+            <time datetime="2021-11-13T06:00:00.000Z" itemprop="datePublished">2021-11-13</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/kafka/">kafka</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>해당 글은 API 문서에 대한 독해 및 개인공부 글입니다. 따라서 개인적인 해석이 있을 수 있습니다.</p>
+</blockquote>
+<h3 id="1-이벤트-스트리밍-event-streaming"><a href="#1-이벤트-스트리밍-event-streaming" class="headerlink" title="1. 이벤트 스트리밍(event streaming)"></a>1. 이벤트 스트리밍(event streaming)</h3><p>스트리밍(streaming) 이란 무엇일까? 스트리밍(streaming)은 ‘흐름’ 이라는 뜻으로 데이터가 흐른다는 뜻에서 사용하는 용어이다. 이러한 ‘흐름’을 통해 원하는 데이터를 보내기도 하고 받기도 할 수 있다. 이를 통해 실시간으로 분석 및 추가적인 로직을 통해 서비스를 제공할 수 있다. 결국 카프카에서 ‘이벤트 스트리밍(event streaming)’이란 일련의 데이터 흐름의 각각의 데이터 이벤트(event)를 지속적인 전달을 하는 스트리밍(streaming)이라는 개념을 갖는다.</p>
+<h3 id="2-카프카의-핵심-3가지"><a href="#2-카프카의-핵심-3가지" class="headerlink" title="2. 카프카의 핵심 3가지"></a>2. 카프카의 핵심 3가지</h3><ul>
+<li>이벤트 데이터 흐름에서 발행(publish)과 구독(subscribe)을 통해 하나의 시스템에서 또 다른 시스템으로 내보내기/가져오기를 할 수 있다.</li>
+<li>이벤트 데이터를 내구성 있고 안정적으로 저장이 가능하다.</li>
+<li>이벤트 스트리밍 과정에서 이벤트를 발생시키거나 소급이 가능하다.</li>
+</ul>
+<p>위의 핵심 3가지 기능은 분산되고 확장성이 뛰어나고 탄력적이며 내결함성이 있으며 안전한 방식으로 제공이 된다. 또한 하드웨어, 가상 머신, 컨테이너, 온프레미스 및 클라우드에 배포할 수 있다.</p>
+<h3 id="3-카프카의-서버와-클라이언트"><a href="#3-카프카의-서버와-클라이언트" class="headerlink" title="3. 카프카의 서버와 클라이언트"></a>3. 카프카의 서버와 클라이언트</h3><p>Kafka는 고성능 TCP 네트워크 프로토콜을 통해 통신하는 서버와 클라이언트로 구성된 분산 시스템이다.</p>
+<blockquote>
+<p>서버: Kafka는 하나 이상의 서버의 클러스터로 실행된다. 이는 지속적으로 데이터를 가져오고 내보내 Kafka를 관계형 데이터베이스 및 다른 Kafka 클러스터와 같은 기존 시스템과 통합할 수 있다. 서버에 장애가 발생할 경우 다른 서버가 작업을 넘겨받아 데이터 손실 없이 지속적인 운영을 보장한다. </p>
+</blockquote>
+<blockquote>
+<p>클라이언트: 네트워크 문제 또는 시스템 장애 발생 시에도 병렬, 규모 및 내결함성 방식으로 이벤트의 스트림을 읽고, 쓰고, 처리하는 분산 애플리케이션과 마이크로 서비스를 작성할 수 있다. 또한 클라이언트는 Kafk스트림 라이브러리, Go, Python, C/C++ 및 REST APIs를 포함한 자바와 스칼라에서 사용할 수 있다.</p>
+</blockquote>
+<h3 id="4-작동-원리"><a href="#4-작동-원리" class="headerlink" title="4. 작동 원리"></a>4. 작동 원리</h3><p>카프카는 일반적으로 “카프카 브로커”라고도 불리며 “브로커”에 맞게 중개자로서의 역할을 한다.</p>
+<p><img src="/images/kafka/kafka_producer_consumer.png" alt="프로듀서와 콘슈머 관계"></p>
+<p>생산자(producer)는 Kafka에 이벤트를 게시(쓰기)하는 클라이언트 애플리케이션이고, 소비자(consumer)는 이러한 이벤트에 가입(읽고 처리, subscribe)하는 애플리케이션이다. Kafka에서는 생산자(producer)와 소비자(consumer)가 서로 완전히 분리되고 독립적이며, 이는 Kafka가 알려진 높은 확장성을 달성하기 위한 핵심 설계 요소이다. 예를 들어, 생산자들은 소비자를 기다릴 필요가 없으며 Kafka는 이벤트를 한 번 정확하게 처리할 수 있는 능력과 같은 다양한 보증을 제공한다.</p>
+<h4 id="4-1-작동-원리-토픽-topic"><a href="#4-1-작동-원리-토픽-topic" class="headerlink" title="4-1. 작동 원리 : 토픽(topic)"></a>4-1. 작동 원리 : 토픽(topic)</h4><p>이러한 카프카 브로커는 이벤트 데이터 생성을 하는 생산자(producer)와 데이터를 수신하는 소비자(consumer)의 사이에 토픽(topic)이라는 것을 통해 발행과 구독의 관계를 만든다.</p>
+<p><img src="/images/kafka/kafka_publish_subscribe.png" alt="카프카 발행과 구독"></p>
+<p>생산자(producer)는 메세지(데이터)를 발행하며 발행시 어떤 토픽(topic)에 발행을 할지 결정한다. 이렇게 발행된 메세지는 토픽(topic) 내부의 파티션(partition)에 저장이 된다. 이렇게 내부의 파티션(partition)에 저장된 메세지는 해당 파티션(partition)에 append가 된다.</p>
+<blockquote>
+<p>왜 여러개의 파티션으로 나눠서 메세지를 저장할까?</p>
+</blockquote>
+<p>만약 파티션의 개념이 없이 분리되지 않은 하나의 공간에만 저장인 된다고 가정해보면 알 수 있다. Kafka는 순차적으로 들어온 순서에 따라 append를 한다. 이때, 많은 양의 메세지가 들어온다면 순차적인 데이터 저장 속도에 많은 불이익이 생긴다. 파티션으로 분리가 되어 있다면 데이터 처리가 병렬로 처리될 수 있는 이점을 얻을 수 있다.</p>
+<blockquote>
+<p>무조건 파티션 수량을 늘린다면 이득일까?</p>
+</blockquote>
+<p>무분별한 파티션 분할은 파티션별로 데이터에 대한 핸들러가 낭비가 될 수 있다. 또한 카프카는 파티션별로 Leader를 선출한다. 이때, 만약 Leader 파티션을 갖은 하나의 카프카가 강제로 종료가 된다면 파티션에 대한 Leader를 재선출을 해야하는데 파티션의 수가 많을수록 많은 Leader를 선출해야 한다는 단점이 있으며 이로인해 장애 복구에 대한 시간이 오래걸릴 수 있다.</p>
+<h4 id="4-2-작동-원리-파티션-규칙"><a href="#4-2-작동-원리-파티션-규칙" class="headerlink" title="4-2. 작동 원리 : 파티션 규칙"></a>4-2. 작동 원리 : 파티션 규칙</h4><p>카프카의 토픽(topic)은 하낭 이상의 파티션을 갖는다. 이때, 생산자(producer)가 토픽(topic)에게 발행한 메세지는 어떠한 파티션에 저장이 되는지에 대한 결정이 필요하다. 이때 아래와 같이 결정이 된다.</p>
+<ul>
+<li>key가 있는경우<ul>
+<li>key를 hash하여 특정 파티션으로 보내며 해당 키는 특정 파티션과 맵핑이 되어 있다. 이러한 맵핑은 파티션 개수가 변경되지 않는다면 유지된다.</li>
+</ul>
+</li>
+<li>key가 없는 경우<ul>
+<li>전통적인 Round Robin 알고리즘을 통해 균등하게 파티션을 선택한다. </li>
+</ul>
+</li>
+</ul>
+<h4 id="4-3-작동-원리-컨슈머-그룹"><a href="#4-3-작동-원리-컨슈머-그룹" class="headerlink" title="4-3. 작동 원리 : 컨슈머 그룹"></a>4-3. 작동 원리 : 컨슈머 그룹</h4><p>카프카의 메세지를 구독하는 소비자(consumer)는 컨슈머 그룹(consumer group)에 속하여 데이터를 받으며 컨슈머 그룹(consumer group)은 하나의 토픽(topic)에 대해 책임을 갖는다.</p>
+<p><img src="/images/kafka/kafka_consumer_offset.png" alt="카프카 컨슈머 그룹(consumer group)"></p>
+<p>그림에서 보면 ‘테스트 토픽’에는 파티션이 3개가 존재한다. 이를 ‘컨슈머 그룹0’이 구독을 하고 있으며 내부에 컨슈머0~2 까지 3개의 컨슈머(consumer)가 존재한다. 현재 파티션 수와 컨슈머 수가 동일하므로 파티션과 컨슈머는 1:1 맵핑이 되어 있다. 여기서 빨강색으로 되어있는 데이터는 현재 컨슈머들이 받는 데이터를 뜻한다. 여기서 ‘컨슈머 그룹0’은 각 파티션별로 현재 어디까지 데이터를 소비했는지에 대한 Offset 정보를 알고 있어 다음에 소비할 데이터를 순차적으로 갖고 갈 수 있다.</p>
+<blockquote>
+<p>파티션 수와 컨슈머(consumer) 수가 다르면 어떻게 될까?</p>
+</blockquote>
+<p>첫 번째로 파티션 수와 컨슈머 수의 관계가 아래와 같다고 가정한다.</p>
+<ul>
+<li>파티션 수 : 컨슈머 수 = 3 : 2</li>
+</ul>
+<p><img src="/images/kafka/kafka_consumer_partiton_up.png" alt="파티션 수 : 컨슈머 수 = 3 : 2"></p>
+<p>파티션 수가 더 많을 경우, 특정 몇몇의 컨슈머(consumer)는 하나 이상의 파티션에 대한 책임진다. 현재 예시에서는 컨슈머0~1 까지 2개의 컨슈머가 3개의 파티션을 담당하고 있으므로 콘슈머1이 채택되어 2개의 파티션을 감당한다.</p>
+<ul>
+<li>파티션 수 : 컨슈머 수 = 3 : 4</li>
+</ul>
+<p><img src="/images/kafka/kafka_consumer_up_partiton.png" alt="파티션 수 : 컨슈머 수 = 3 : 4"></p>
+<p>컨슈머(consumer) 수가 더 많을 경우, 특정 몇몇의 컨슈머(consumer)는 아무것도 하지 않게 된다. 현재 예시에서는 컨슈머0~3 까지 4개의 컨슈머가 3개의 파티션을 담당하고 있으므로 각각 파티션과 1:1 맵핑이 되고 컨슈머3은 남게 된다.</p>
+<blockquote>
+<p>컨슈머(consumer) 중에 하나가 장애가 발생한다면 어떻게 될까?</p>
+</blockquote>
+<p>컨슈머 그룹0에 속한 컨슈머2가 아래와 같이 장애가 발생했다고 가정한다.</p>
+<p><img src="/images/kafka/kafka_consumer_error0.png" alt="콘슈머 에러 발생"></p>
+<p>콘슈머2는 현재 카프카 브로커(Kafka)의 파티션3으로부터 정상적인 메세지를 처리할 수 없는 상황이다. 이때, 카프카는 장애를 극복하기 위해 일련의 과정이 필요하며 이를 리밸런싱(rebalancing)이라고 한다.</p>
+<p><img src="/images/kafka/kafka_consumer_error1.png" alt="콘슈머 에러 발생"></p>
+<p>결국 이러한 리밸런싱(rebalancing)을 통해 정상적인 콘슈머들이 파티션1~3에 대해 처리를 할 수 있도록 설정이 된다.</p>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- https://kafka.apache.org/documentation</span><br><span class="line">- https://12bme.tistory.com/528</span><br><span class="line">- https://medium.com/@umanking/%EC%B9%B4%ED%94%84%EC%B9%B4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0-%ED%95%98%EA%B8%B0%EC%A0%84%EC%97%90-%EB%A8%BC%EC%A0%80-data%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0%ED%95%B4%EB%B3%B4%EC%9E%90-d2e3ca2f3c2</span><br></pre></td></tr></table></figure>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/2021/11/13/Kafka01/" data-id="ckvxpxb8y002aaoti81zumxwo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "People and Technology"
+        },
+        "headline": "카프카 1편 [구조 및 개념]",
+        "image": "http://yoursite.com/images/kafka/kafka.png",
+        "keywords": "kafka",
+        "genre": "IT Tech 4. Java",
+        "datePublished": "2021-11-13",
+        "dateCreated": "2021-11-13",
+        "dateModified": "2021-11-13",
+        "url": "http://yoursite.com/2021/11/13/Kafka01/",
+        "description": "
+해당 글은 API 문서에 대한 독해 및 개인공부 글입니다. 따라서 개인적인 해석이 있을 수 있습니다.
+
+1. 이벤트 스트리밍(event streaming)스트리밍(streaming) 이란 무엇일까? 스트리밍(streaming)은 ‘흐름’ 이라는 뜻으로 데이터가 흐른다는 뜻에서 사용하는 용어이다. 이러한 ‘흐름’을 통해 원하는 데이터를 보내기도 하고 받기도",
+        "wordCount": 809
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/pntkorea/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/company/people-and-technology" target="_blank" rel="noopener">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/channel/UCjta-QWjrvGLDS_BpyV3C2w" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/IndoorPlus" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="slideshare" href="https://www.slideshare.net/AntonioHong" target="_blank" rel="noopener">
+                        <i class="icon fa fa-slideshare"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="http://www.pntbiz.co.kr/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2021/10/09/influxDB-01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">InfluxDB-01 [살펴보기]</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/13/Kafka01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/kafka/kafka.png)" alt="카프카 1편 [구조 및 개념]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/4-java/">4. Java</a></p>
+                            <p class="item-title"><a href="/2021/11/13/Kafka01/" class="title">카프카 1편 [구조 및 개념]</a></p>
+                            <p class="item-date"><time datetime="2021-11-13T06:00:00.000Z" itemprop="datePublished">2021-11-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/09/influxDB-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/influxDB.png)" alt="InfluxDB-01 [살펴보기]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2021/10/09/influxDB-01/" class="title">InfluxDB-01 [살펴보기]</a></p>
+                            <p class="item-date"><time datetime="2021-10-09T05:56:55.000Z" itemprop="datePublished">2021-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/09/aws01_overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/aws/01/aws01_thumbnail.png)" alt="AWS 1편 [아마존 웹 서비스]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2020/08/09/aws01_overview/" class="title">AWS 1편 [아마존 웹 서비스]</a></p>
+                            <p class="item-date"><time datetime="2020-08-09T03:56:55.000Z" itemprop="datePublished">2020-08-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/05/react-hooks-chapter03-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-2부 [서버 연동]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/05/react-hooks-chapter03-2/" class="title">React-3-2부 [서버 연동]</a></p>
+                            <p class="item-date"><time datetime="2020-04-05T06:24:55.000Z" itemprop="datePublished">2020-04-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/04/react-hooks-chapter03-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-1부 [JWT와 React Router]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/04/react-hooks-chapter03-1/" class="title">React-3-1부 [JWT와 React Router]</a></p>
+                            <p class="item-date"><time datetime="2020-04-04T10:29:55.000Z" itemprop="datePublished">2020-04-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/">IT Tech</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/1-iot/">1. IoT</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/3-react/">3. React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/4-java/">4. Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/9-etc/">9. etc</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/">Recruit</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">AWS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/edge-computing/">Edge Computing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/influxdb/">InfluxDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iot/">IoT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lbs/">LBS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">Node.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pull-requests/">Pull requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtls/">RTLS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx/">VertX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beacon/">beacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dashboard/">dashboard</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-analysis/">data analysis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineer/">engineer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/">flutter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/platform/">platform</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recruit/">recruit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springBoot</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/aws/" style="font-size: 10px;">AWS</a> <a href="/tags/edge-computing/" style="font-size: 10px;">Edge Computing</a> <a href="/tags/influxdb/" style="font-size: 10px;">InfluxDB</a> <a href="/tags/iot/" style="font-size: 13.33px;">IoT</a> <a href="/tags/lbs/" style="font-size: 13.33px;">LBS</a> <a href="/tags/network/" style="font-size: 13.33px;">Network</a> <a href="/tags/node-js/" style="font-size: 13.33px;">Node.js</a> <a href="/tags/pull-requests/" style="font-size: 10px;">Pull requests</a> <a href="/tags/rtls/" style="font-size: 13.33px;">RTLS</a> <a href="/tags/vertx/" style="font-size: 13.33px;">VertX</a> <a href="/tags/beacon/" style="font-size: 10px;">beacon</a> <a href="/tags/dashboard/" style="font-size: 13.33px;">dashboard</a> <a href="/tags/data-analysis/" style="font-size: 13.33px;">data analysis</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/engineer/" style="font-size: 10px;">engineer</a> <a href="/tags/flutter/" style="font-size: 16.67px;">flutter</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/platform/" style="font-size: 10px;">platform</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/recruit/" style="font-size: 10px;">recruit</a> <a href="/tags/springboot/" style="font-size: 10px;">springBoot</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 People and Technology</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://yoursite.com/2021/11/13/Kafka01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

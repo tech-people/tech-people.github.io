@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Flutter-3부 [Flutter 이해하기] | People and Technology</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="flutter">
+    
+    <meta name="description" content="작성자 : 솔루션 모바일팀  목차1.Stateful Widget Lifecycle2.위젯 종류3.BLoC Pattern4.References1.Stateful Widget Lifecycle StatefulWidget을 만들 때 State라는 오브젝트를 만듭니다. 이 오브젝트는 위젯이 동작하는 동안 mutable state를 뜻합니다.  state 정의">
+<meta name="keywords" content="flutter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter-3부 [Flutter 이해하기]">
+<meta property="og:url" content="http://yoursite.com/2020/03/17/flutter03/index.html">
+<meta property="og:site_name" content="People and Technology">
+<meta property="og:description" content="작성자 : 솔루션 모바일팀  목차1.Stateful Widget Lifecycle2.위젯 종류3.BLoC Pattern4.References1.Stateful Widget Lifecycle StatefulWidget을 만들 때 State라는 오브젝트를 만듭니다. 이 오브젝트는 위젯이 동작하는 동안 mutable state를 뜻합니다.  state 정의">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/flutter/thumbnail.jpg">
+<meta property="og:updated_time" content="2021-11-13T10:48:21.519Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter-3부 [Flutter 이해하기]">
+<meta name="twitter:description" content="작성자 : 솔루션 모바일팀  목차1.Stateful Widget Lifecycle2.위젯 종류3.BLoC Pattern4.References1.Stateful Widget Lifecycle StatefulWidget을 만들 때 State라는 오브젝트를 만듭니다. 이 오브젝트는 위젯이 동작하는 동안 mutable state를 뜻합니다.  state 정의">
+<meta name="twitter:image" content="http://yoursite.com/images/flutter/thumbnail.jpg">
+    
+
+    
+        <link rel="alternate" href="http://www.pntbiz.co.kr/" title="People and Technology" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">피플앤드테크놀러지 기술 블로그 / Tech Blog</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/">IT Tech</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/1-iot/">1. IoT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/3-react/">3. React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/4-java/">4. Java</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/9-etc/">9. etc</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/">Recruit</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/it-tech/5-flutter/">5. Flutter</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-flutter03" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Flutter-3부 [Flutter 이해하기]
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/03/17/flutter03/" class="article-date">
+            <time datetime="2020-03-17T05:56:55.000Z" itemprop="datePublished">2020-03-17</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/flutter/">flutter</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>작성자 : 솔루션 모바일팀</p>
+</blockquote>
+<h1 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h1><h3 id="1-Stateful-Widget-Lifecycle"><a href="#1-Stateful-Widget-Lifecycle" class="headerlink" title="1.Stateful Widget Lifecycle"></a>1.Stateful Widget Lifecycle</h3><h3 id="2-위젯-종류"><a href="#2-위젯-종류" class="headerlink" title="2.위젯 종류"></a>2.위젯 종류</h3><h3 id="3-BLoC-Pattern"><a href="#3-BLoC-Pattern" class="headerlink" title="3.BLoC Pattern"></a>3.BLoC Pattern</h3><h3 id="4-References"><a href="#4-References" class="headerlink" title="4.References"></a>4.References</h3><h1 id="1-Stateful-Widget-Lifecycle-1"><a href="#1-Stateful-Widget-Lifecycle-1" class="headerlink" title="1.Stateful Widget Lifecycle"></a>1.Stateful Widget Lifecycle</h1><p> StatefulWidget을 만들 때 State라는 오브젝트를 만듭니다. 이 오브젝트는 위젯이 동작하는 동안 mutable state를 뜻합니다.</p>
+<ul>
+<li>state 정의</li>
+</ul>
+<p>①위젯에 의해서 사용되어지는 데이터는 변할 수 있다.</p>
+<p>②위젯이 빌드될 때 데이터들을 동기적으로 읽을 수 없다. 모든 state들은 build 함수가 호출될 때까지 설정되어야 한다.  </p>
+<ul>
+<li>Lifecycle</li>
+</ul>
+<p>① createState()<br>:Framework가 StatefulWidget을 만들경우 createState()가 즉시 호출된다.</p>
+<p>② mounted is true<br>:모든 위젯은 this.mounted : bool 속성을 가지고 있다. 즉 buildContext가 할당될 때 this.mounted가 true로 리턴된다.</p>
+<p>③ initState()<br>:widget이 만들어지고 생성자 후에 처음 메소드 실행할때 이 함수가 실행된다. super.initState() 를 필수적으로 호출해야 한다.</p>
+<p>④ didChangeDependencies()<br>:위젯이 최초 생성될때 initState 다음에 바로 호출 된다. 또한 위젯이 의존하는 데이터의 객체가 호출될때마다 호출된다. 예를 들면 업데이트되는 위젯을 상속한 경우 공식문서 또한 상속한 위젯이 업데이트 될때 네트워크 호출(또는 다른 비용이 큰 액션)(역자주: API호출)이 필요한 경우 유용하다고 함.</p>
+<p>⑤ build()<br>:필수적으로 오버라이딩해서 구현해야되는 함수이다. 위젯을 리턴한다.</p>
+<p>⑥ didUpdateWidget(Widget oldWidget)<br>:didUpdateWidget()는 부모 위젯이 변경되어 이 위젯을 재 구성해야 하는 경우(다은 데이터를 제공 해야하기 때문) 이것은 플러터가 오래동안 유지 되는 state를 다시 사용하기 때문이다. 이 경우 initState()에서 처럼 읿부 데이터를 다시 초기화 해야 한다.</p>
+<p>⑦ setState()<br>:setState() 메서드는 플러터 프레임워크 자체적, 또는 개발자로 부터 자주 호출된다. ‘데이터가 변경되었음’을 프레임워크에 알리는데 사용되며 build context의 위젯을 다시 빌드하게 한다. setState()는 비동기적이 않은 callback을 사용한다.(역자주: callback으로 비동기를 사용할 수 없다는 말임).</p>
+<p>⑧ deactivate()<br>:이 메서드는 거의 사용되지 않는다. deactivate()는 tree에서 State가 제거 될때 호출 된다. 그러나 현재 프레임 변경이 완료되기 전에 다시 삽입 될 수 있다. 이 메서드는 State객체가 tree의 한 지점에서 다른 지점으로 이동 할 수 있기 때문에 기본적으로 존재한다.</p>
+<p>⑨ dispose()<br>:dispost()는 State객체가 영구히 제거 된다.</p>
+<p>⑩ mounted is false<br>:이 상태에서 state 객체는 결코 다시 mount되지 않으며, setState()가 호출되면 에러가 발생한다.</p>
+<h1 id="2-위젯-종류-1"><a href="#2-위젯-종류-1" class="headerlink" title="2.위젯 종류"></a>2.위젯 종류</h1><p> widget은 widgets library의 standard widget과 Material library의 widget 입니다.<br> widgets library는 어느 app이든 사용가능하지만 Material library는 Material app에서만 사용 가능합니다.</p>
+<h5 id="1-Standard-widgets"><a href="#1-Standard-widgets" class="headerlink" title="1)Standard widgets"></a>1)Standard widgets</h5><ul>
+<li>Container: padding, margins, borders, background color, 기타 style을 적용 가능</li>
+<li>GridView: widget 을 스크롤 가능한 grid 모양으로 배치</li>
+<li>ListView: widget 을 스크롤 가능한 list 로 배치</li>
+<li>Stack: widget을 순차적으로 쌓아가면서 표시  </li>
+</ul>
+<h5 id="2-Material-widgets"><a href="#2-Material-widgets" class="headerlink" title="2)Material widgets"></a>2)Material widgets</h5><ul>
+<li>Card: 관련된 정보를 box 안에 표시</li>
+<li>ListTile: 최대 3줄의 text를 표시하고, trailing icon 삽입  </li>
+</ul>
+<h5 id="3-Container"><a href="#3-Container" class="headerlink" title="3)Container"></a>3)Container</h5><p> <img src="/images/flutter/flutter02_4.png" alt="flutter02_4"></p>
+<ul>
+<li>padding, margin, border 사용 가능</li>
+<li>background color 또는 image 변경 가능</li>
+<li>하나의 child widget을 갖는다. 다만, child widget으로 Row, Column 등 다수의 자식을 갖는 widget이 올 수 있다.  </li>
+</ul>
+<h5 id="4-GridView"><a href="#4-GridView" class="headerlink" title="4)GridView"></a>4)GridView</h5><p> <img src="/images/flutter/flutter02_5.png" alt="flutter02_5"></p>
+<ul>
+<li>grid 형태로 widget 배치</li>
+<li>scrolling지원</li>
+<li>직접 custom grid를 만들던지, 아래 제공되는 두가지 속성을 사용가능</li>
+<li>GridView.count 지정된 개수 만큼의 column 을 제공</li>
+<li>GridView.extent 타일의 최대 width를 지정</li>
+<li>MediaQuery.of(context).orientation 를 사용하여 device의 landscape 나 portrait 을 인지하여 적절히 반응하도록 할 수 있다.  </li>
+</ul>
+<h5 id="5-ListView"><a href="#5-ListView" class="headerlink" title="5)ListView"></a>5)ListView</h5><p> <img src="/images/flutter/flutter02_6.png" alt="flutter02_6"></p>
+<ul>
+<li>Column형 widget으로 list를 만든다.</li>
+<li>수평 또는 수직의 layout을 만들 수 있다.</li>
+<li>자동으로 스크롤링을 만든다.</li>
+<li>Column widget 보다 확장성은 적다.  </li>
+</ul>
+<h5 id="6-Stack"><a href="#6-Stack" class="headerlink" title="6)Stack"></a>6)Stack</h5><p> <img src="/images/flutter/flutter02_7.png" alt="flutter02_7"></p>
+<p>  Stack을 이용해 image 상단에 그라디언트를 넣습니다. 이 그라디언트를 통해 toolbar 의 icon이 iamge와 구분됩니다.</p>
+<ul>
+<li>다른 widget 위에 widget을 배치</li>
+<li>첫번째 widget이 base widget 이다. 그 위로 다른 widget 이 배치된다.</li>
+<li>Stack 은 scroll 되지 않는다.</li>
+<li>box를 넘는 자식 widget을 자를 수 있다.  </li>
+</ul>
+<h5 id="7-Stack"><a href="#7-Stack" class="headerlink" title="7)Stack"></a>7)Stack</h5><p> <img src="/images/flutter/flutter02_8.png" alt="flutter02_8"></p>
+<ul>
+<li>Material card 이다.</li>
+<li>관련된 정보를 표현하는데 사용</li>
+<li>자식을 하나만 갖지만, 멀티플 자식을 갖는 위젯을 자식으로 가질 수 있다.</li>
+<li>둥근 테두리와 그림자를 보여준다.</li>
+<li>스크롤이 되지 않는다.</li>
+<li>Material library 의 widget 이다.</li>
+</ul>
+<h1 id="3-BLoC-Pattern-1"><a href="#3-BLoC-Pattern-1" class="headerlink" title="3.BLoC Pattern"></a>3.BLoC Pattern</h1><ul>
+<li><p>BloC Pattern이란?</p>
+<p>BLoC(Bussiness Logic Component) Pattern 은 Flutter 의 상태 관리를 제어하기 위해서 Google 개발자에 의해서 디자인 되었습니다. Flutter 에서는 상태에 따라서 렌더링이 일어나기 때문에, 상태 관리가 매우 중요합니다. BLoC는 UI 와 Bussiness Logic 을 분리하여, 각각 코드의 의존성을 낮추게 해줍니다. Flutter 을 위해 설계 되었지만, 디자인 패턴이기 때문에, 어떠한 프레임워크 나 언어에서도 사용이 가능합니다.</p>
+</li>
+<li><p>BLoC의 특징</p>
+<p>① UI 에서는 여러 BLoC 이 존재할 수 있다.<br>② UI 에서는 화면에 집중하고, BLoC 에서는 Logic 에 집중한다.<br>③ UI 에서는 BLoC 의 내부 구현에 대해서 몰라도 된다.<br>④ BLoC 은 여러 UI 에서 구독 할 수 있다. 때문에 재사용이 용의하다.<br>⑤ BLoC 만을 분리해서 테스트가 가능하다.</p>
+</li>
+<li><p>BLoC의 형태</p>
+<p>BLoC 에서 각 UI 객체 들은 BLoC 객체를 구독하고 있다.<br>BLoC 객체의 상태가 변경되면, BLoC 의 상태를 구독중인 UI 객체 들은 그 즉시 해당 상태로 UI 를 변경한다.<br>BLoC 객체는 UI 객체로 부터 이벤트를 전달받으면, BLoC 객체는 필요한 Provider 나 Repository 로 부터 데이터를 전달받아, Bussiness Logic 을 처리한다.<br>Bussiness Logic 을 처리한후, BLoC 객체를 구독중인 UI 객체 들에게 상태를 전달한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class BLoC &#123;</span><br><span class="line">    provider: Provider = new Provider();</span><br><span class="line">    stream: Subject = new Subject();</span><br><span class="line">    async sink() &#123;</span><br><span class="line">        const data = await Provider.getCounterModel();</span><br><span class="line">        const result = await this.BussinessLogic(data);</span><br><span class="line">        this.stream.next(result);</span><br><span class="line">    &#125;</span><br><span class="line">    private async BussinessLogic() &#123;</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p> UI 객체는 구독중이던 BLoC 객체의 상태가 변경되면 상태를 전달받는데, 이때 얻은 상태를 이용하여 화면을 재구성한다.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class UI &#123;</span><br><span class="line">    bloc = new BLoC();</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        this.bloc.stream.subscribe((data) =&gt; &#123;</span><br><span class="line">            this.render(data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    render(data) &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div onClick=&#123;this.bloc.sink&#125;&gt;</span><br><span class="line">                &#123;data&#125;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>Flutter와 BLoC</p>
+<p>Flutter 에서는 Stream 을 이용해서 BLoC 을 구현한다.<br>StreamController 으로 Observable 객체를 생성한다.<br>StreamController 의 Sink 를 이용해서 값을 전달한다.<br>StreamController 의 Steam 를 이용해서 상태를 구독한다.<br>이때 RxDart 를 이용하여 StreamController 을 쉽게 만들 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Bloc &#123;</span><br><span class="line">  final _repository = Repository();</span><br><span class="line">  final _subject = PublishSubject&lt;String&gt;();</span><br><span class="line">  Observable&lt;String&gt; get stream =&gt; _subject.stream;</span><br><span class="line">  action() async &#123;</span><br><span class="line">    String result= await _repository.getData();</span><br><span class="line">    _subject.sink.add(result);</span><br><span class="line">  &#125;</span><br><span class="line">  dispose() &#123;</span><br><span class="line">    _subject.close();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p> UI 에서는 StatefulWidget 을 쓰지 않고, 그리고 setState 를 쓰지 않고도 bloc 의 상태 변경에 따라 UI 를 변경할 수 있다.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class UI extends StatelessWidget &#123;</span><br><span class="line">  UI() &#123;</span><br><span class="line">    bloc.action();</span><br><span class="line">  &#125;</span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    return Scaffold(</span><br><span class="line">      // ...</span><br><span class="line">      body: StreamBuilder(</span><br><span class="line">        stream: bloc.stream,</span><br><span class="line">        builder: (context, AsyncSnapshot&lt;String&gt; snapshot) &#123;</span><br><span class="line">          return Text(snapshot.data);</span><br><span class="line">        &#125;,</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
+<li><a href="https://brunch.co.kr/@myner/5" target="_blank" rel="noopener">https://brunch.co.kr/@myner/5</a></li>
+<li><a href="https://medium.com/flutter-korea/%EC%99%9C-flutter%EB%8A%94-dart%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%EA%B0%80-e838b9415f57" target="_blank" rel="noopener">https://medium.com/flutter-korea/%EC%99%9C-flutter%EB%8A%94-dart%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%EA%B0%80-e838b9415f57</a></li>
+<li><a href="https://kimch3617.tistory.com/entry/Flutter%EB%9E%80-Flutter%EC%9D%98-%ED%8A%B9%EC%A7%95" target="_blank" rel="noopener">https://kimch3617.tistory.com/entry/Flutter%EB%9E%80-Flutter%EC%9D%98-%ED%8A%B9%EC%A7%95</a></li>
+<li><a href="https://medium.com/withj-kr/react-native-vs-flutter-%ED%81%AC%EB%A1%9C%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%95%B1-%EA%B0%9C%EB%B0%9C-%EC%96%B4%EB%96%A4-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%98%EB%82%98-701ecbc19a24" target="_blank" rel="noopener">https://medium.com/withj-kr/react-native-vs-flutter-%ED%81%AC%EB%A1%9C%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%95%B1-%EA%B0%9C%EB%B0%9C-%EC%96%B4%EB%96%A4-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%98%EB%82%98-701ecbc19a24</a></li>
+<li><a href="https://skuld2000.tistory.com/69" target="_blank" rel="noopener">https://skuld2000.tistory.com/69</a></li>
+<li><a href="https://medium.com/@pks2974/flutter-%EA%B0%84%EB%8B%A8-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-9532e16aff57" target="_blank" rel="noopener">https://medium.com/@pks2974/flutter-%EA%B0%84%EB%8B%A8-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-9532e16aff57</a></li>
+<li><a href="https://javaexpert.tistory.com/974" target="_blank" rel="noopener">https://javaexpert.tistory.com/974</a></li>
+<li><a href="https://jaceshim.github.io/2019/01/28/flutter-study-stateful-widget-lifecycle/" target="_blank" rel="noopener">https://jaceshim.github.io/2019/01/28/flutter-study-stateful-widget-lifecycle/</a></li>
+<li><a href="https://insights.stackoverflow.com/survey/2019#methodology" target="_blank" rel="noopener">https://insights.stackoverflow.com/survey/2019#methodology</a></li>
+<li><a href="https://medium.com/@pks2974/bloc-%EC%9D%B4%ED%95%B4-%ED%95%98%EA%B8%B0-%EB%B0%8F-%EA%B0%84%EB%8B%A8-%EC%A0%95%EB%A6%AC-%ED%95%98%EA%B8%B0-7dc705e4c640" target="_blank" rel="noopener">https://medium.com/@pks2974/bloc-%EC%9D%B4%ED%95%B4-%ED%95%98%EA%B8%B0-%EB%B0%8F-%EA%B0%84%EB%8B%A8-%EC%A0%95%EB%A6%AC-%ED%95%98%EA%B8%B0-7dc705e4c640</a></li>
+<li><a href="http://murmurblog.com/layouts-in-flutter/" target="_blank" rel="noopener">http://murmurblog.com/layouts-in-flutter/</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/2020/03/17/flutter03/" data-id="ckvxpxb95002gaoti0uvwz0a2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "People and Technology"
+        },
+        "headline": "Flutter-3부 [Flutter 이해하기]",
+        "image": "http://yoursite.com/images/flutter/thumbnail.jpg",
+        "keywords": "flutter",
+        "genre": "IT Tech 5. Flutter",
+        "datePublished": "2020-03-17",
+        "dateCreated": "2020-03-17",
+        "dateModified": "2021-11-13",
+        "url": "http://yoursite.com/2020/03/17/flutter03/",
+        "description": "
+작성자 : 솔루션 모바일팀
+
+목차1.Stateful Widget Lifecycle2.위젯 종류3.BLoC Pattern4.References1.Stateful Widget Lifecycle StatefulWidget을 만들 때 State라는 오브젝트를 만듭니다. 이 오브젝트는 위젯이 동작하는 동안 mutable state를 뜻합니다.
+
+state 정의
+
+",
+        "wordCount": 1273
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/pntkorea/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/company/people-and-technology" target="_blank" rel="noopener">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/channel/UCjta-QWjrvGLDS_BpyV3C2w" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/IndoorPlus" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="slideshare" href="https://www.slideshare.net/AntonioHong" target="_blank" rel="noopener">
+                        <i class="icon fa fa-slideshare"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="http://www.pntbiz.co.kr/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/03/25/edge_computing/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            엣지 컴퓨팅(Edge Computing)
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/03/16/flutter01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Flutter-2부 [개발환경구축]</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/13/Kafka01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/kafka/kafka.png)" alt="카프카 1편 [구조 및 개념]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/4-java/">4. Java</a></p>
+                            <p class="item-title"><a href="/2021/11/13/Kafka01/" class="title">카프카 1편 [구조 및 개념]</a></p>
+                            <p class="item-date"><time datetime="2021-11-13T06:00:00.000Z" itemprop="datePublished">2021-11-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/09/influxDB-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/influxDB.png)" alt="InfluxDB-01 [살펴보기]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2021/10/09/influxDB-01/" class="title">InfluxDB-01 [살펴보기]</a></p>
+                            <p class="item-date"><time datetime="2021-10-09T05:56:55.000Z" itemprop="datePublished">2021-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/09/aws01_overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/aws/01/aws01_thumbnail.png)" alt="AWS 1편 [아마존 웹 서비스]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2020/08/09/aws01_overview/" class="title">AWS 1편 [아마존 웹 서비스]</a></p>
+                            <p class="item-date"><time datetime="2020-08-09T03:56:55.000Z" itemprop="datePublished">2020-08-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/05/react-hooks-chapter03-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-2부 [서버 연동]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/05/react-hooks-chapter03-2/" class="title">React-3-2부 [서버 연동]</a></p>
+                            <p class="item-date"><time datetime="2020-04-05T06:24:55.000Z" itemprop="datePublished">2020-04-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/04/react-hooks-chapter03-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-1부 [JWT와 React Router]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/04/react-hooks-chapter03-1/" class="title">React-3-1부 [JWT와 React Router]</a></p>
+                            <p class="item-date"><time datetime="2020-04-04T10:29:55.000Z" itemprop="datePublished">2020-04-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/">IT Tech</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/1-iot/">1. IoT</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/3-react/">3. React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/4-java/">4. Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/9-etc/">9. etc</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/">Recruit</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">AWS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/edge-computing/">Edge Computing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/influxdb/">InfluxDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iot/">IoT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lbs/">LBS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">Node.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pull-requests/">Pull requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtls/">RTLS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx/">VertX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beacon/">beacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dashboard/">dashboard</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-analysis/">data analysis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineer/">engineer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/">flutter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/platform/">platform</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recruit/">recruit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springBoot</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/aws/" style="font-size: 10px;">AWS</a> <a href="/tags/edge-computing/" style="font-size: 10px;">Edge Computing</a> <a href="/tags/influxdb/" style="font-size: 10px;">InfluxDB</a> <a href="/tags/iot/" style="font-size: 13.33px;">IoT</a> <a href="/tags/lbs/" style="font-size: 13.33px;">LBS</a> <a href="/tags/network/" style="font-size: 13.33px;">Network</a> <a href="/tags/node-js/" style="font-size: 13.33px;">Node.js</a> <a href="/tags/pull-requests/" style="font-size: 10px;">Pull requests</a> <a href="/tags/rtls/" style="font-size: 13.33px;">RTLS</a> <a href="/tags/vertx/" style="font-size: 13.33px;">VertX</a> <a href="/tags/beacon/" style="font-size: 10px;">beacon</a> <a href="/tags/dashboard/" style="font-size: 13.33px;">dashboard</a> <a href="/tags/data-analysis/" style="font-size: 13.33px;">data analysis</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/engineer/" style="font-size: 10px;">engineer</a> <a href="/tags/flutter/" style="font-size: 16.67px;">flutter</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/platform/" style="font-size: 10px;">platform</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/recruit/" style="font-size: 10px;">recruit</a> <a href="/tags/springboot/" style="font-size: 10px;">springBoot</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 People and Technology</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://yoursite.com/2020/03/17/flutter03/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

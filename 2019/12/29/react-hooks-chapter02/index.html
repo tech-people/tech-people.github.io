@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>React-2부 [상태관리] | People and Technology</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="react">
+    
+    <meta name="description" content="작성자 : 플랫폼 개발실 R&amp;amp;D팀 유주빈  들어가기 앞서 본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅에 관한 내용은 다루지 않습니다. 리액트의 기본적인 환경셋팅에 관한 내용은 아래의 리액트 1부를 참고해 주세요.  React 1부 : 개발환경 구축하기 1부에서 리액트는 단방향 데이터 흐름을 갖고 있다고 하">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React-2부 [상태관리]">
+<meta property="og:url" content="http://yoursite.com/2019/12/29/react-hooks-chapter02/index.html">
+<meta property="og:site_name" content="People and Technology">
+<meta property="og:description" content="작성자 : 플랫폼 개발실 R&amp;amp;D팀 유주빈  들어가기 앞서 본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅에 관한 내용은 다루지 않습니다. 리액트의 기본적인 환경셋팅에 관한 내용은 아래의 리액트 1부를 참고해 주세요.  React 1부 : 개발환경 구축하기 1부에서 리액트는 단방향 데이터 흐름을 갖고 있다고 하">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/react-hooks.png">
+<meta property="og:updated_time" content="2021-11-13T10:48:21.529Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React-2부 [상태관리]">
+<meta name="twitter:description" content="작성자 : 플랫폼 개발실 R&amp;amp;D팀 유주빈  들어가기 앞서 본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅에 관한 내용은 다루지 않습니다. 리액트의 기본적인 환경셋팅에 관한 내용은 아래의 리액트 1부를 참고해 주세요.  React 1부 : 개발환경 구축하기 1부에서 리액트는 단방향 데이터 흐름을 갖고 있다고 하">
+<meta name="twitter:image" content="http://yoursite.com/images/react-hooks.png">
+    
+
+    
+        <link rel="alternate" href="http://www.pntbiz.co.kr/" title="People and Technology" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">피플앤드테크놀러지 기술 블로그 / Tech Blog</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/">IT Tech</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/1-iot/">1. IoT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/3-react/">3. React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/4-java/">4. Java</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/9-etc/">9. etc</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/">Recruit</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/it-tech/3-react/">3. React</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-react-hooks-chapter02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        React-2부 [상태관리]
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/12/29/react-hooks-chapter02/" class="article-date">
+            <time datetime="2019-12-29T04:29:55.000Z" itemprop="datePublished">2019-12-29</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/react/">react</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>작성자 : 플랫폼 개발실 R&amp;D팀 유주빈</p>
+</blockquote>
+<h2 id="들어가기-앞서"><a href="#들어가기-앞서" class="headerlink" title="들어가기 앞서"></a>들어가기 앞서</h2><ul>
+<li>본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅에 관한 내용은 다루지 않습니다. 리액트의 기본적인 환경셋팅에 관한 내용은 아래의 리액트 1부를 참고해 주세요.</li>
+</ul>
+<h6 id="React-1부-개발환경-구축하기"><a href="#React-1부-개발환경-구축하기" class="headerlink" title="React 1부 : 개발환경 구축하기"></a><a href="https://tech-people.github.io/2019/12/12/react-hooks-chapter01/" target="_blank" rel="noopener">React 1부 : 개발환경 구축하기</a></h6><ul>
+<li>1부에서 리액트는 단방향 데이터 흐름을 갖고 있다고 하였습니다. 부모 컴포넌트가 자식 컴포넌트에게 데이터를 전달하는 것을 의미합니다. 그렇다면 자식 컴포넌트가 부모 컴포넌트에게 데이터를 전달하는 방법은 없을까요?</li>
+</ul>
+<h2 id="간략한-예제"><a href="#간략한-예제" class="headerlink" title="간략한 예제"></a>간략한 예제</h2><ul>
+<li>본 글에서는 위의 해답을 예제를 갖고 설명을 하도록 하겠습니다. 해당 예제는 깃허브에서 프로젝트를 다운로드 받으실 수 있습니다.</li>
+</ul>
+<h6 id="깃허브주소"><a href="#깃허브주소" class="headerlink" title="깃허브주소"></a><a href="https://github.com/SayRew/pntbiz_react" target="_blank" rel="noopener">깃허브주소</a></h6><ul>
+<li>프로젝트의 파일 구조에서 chapter01_react_setting 프로젝트는 1부 프로젝트이며 chapter02_react_component는 본글의 2부 프로젝트입니다. 해당 프로젝트의 핵심 파일구조는 아래와 같습니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">chapter02_react_component(본 글의 root  경로)</span><br><span class="line">      └─src</span><br><span class="line">         └─ 01. Parameters&amp;Callback </span><br><span class="line">         └─ 02. Context API </span><br><span class="line">         └─ 03. Redux </span><br><span class="line">         └─ 04. Mobx</span><br><span class="line">         └─ app.css (01,02,03,04에서 공통적으로 사용하는 css)</span><br><span class="line">         └─ RootContainer.jsx (01,02,03,04의 결과를 묶기위한 jsx 파일)</span><br><span class="line">      ... 이하 생략 ...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>프로젝트를 보시면 아시겠지만 01~04번까지 UI상으로는 동일한 프로젝트입니다. 해당 소스를 실행하면 아래와 같은 예제를 보실 수 있습니다.</li>
+</ul>
+<p><img src="/images/react/chapter-02-gif.gif" alt="예제"></p>
+<ul>
+<li>위의 그림은 부모 컴포넌트와 왼쪽, 오른쪽 자식 컴포넌트간의 공을 주고 받는 예제입니다. 각 컴포넌트들은 서로에게 공을 넘겨줄 수 있는 버튼을 갖고 있습니다. 해당 예제를 통해 컴포넌트들 간에 상태를 어떤 방식으로 전달할 수 있는지 보도록 하겠습니다.</li>
+</ul>
+<h2 id="컴포넌트들의-상태관리-및-전달"><a href="#컴포넌트들의-상태관리-및-전달" class="headerlink" title="컴포넌트들의 상태관리 및 전달"></a>컴포넌트들의 상태관리 및 전달</h2><ul>
+<li>리액트에서 상태관리 및 전달을 할 경우 대표적으로 사용되는 방법은 아래와 같이 4가지가 존재합니다. 위의 프로젝트 번호와 매칭되어 생각하시면 되겠습니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01. 단방향 props 전달 및 부모 컴포넌트의 Call Back 함수</span><br><span class="line">02. Context API를 활용한 전역상태 관리</span><br><span class="line">03. Redux를 활용한 전역상태 관리</span><br><span class="line">04. MobX를 활용한 전역상태 관리</span><br></pre></td></tr></table></figure>
+
+<h3 id="01-단방향-props-전달-및-부모-컴포넌트의-Call-Back-함수"><a href="#01-단방향-props-전달-및-부모-컴포넌트의-Call-Back-함수" class="headerlink" title="01. 단방향 props 전달 및 부모 컴포넌트의 Call Back 함수"></a>01. 단방향 props 전달 및 부모 컴포넌트의 Call Back 함수</h3><h4 id="폴더명-“01-Parameters-amp-Callback”"><a href="#폴더명-“01-Parameters-amp-Callback”" class="headerlink" title="[폴더명 : “01. Parameters&amp;Callback”]"></a>[폴더명 : “01. Parameters&amp;Callback”]</h4><ul>
+<li>먼저 파일구조를 보도록 하겠습니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">chapter02_react_component(본 글의 root  경로)</span><br><span class="line">      └─ src</span><br><span class="line">          └─ 01. Parameters&amp;Callback </span><br><span class="line">                        └─ Root.jsx</span><br><span class="line">                        └─ components</span><br><span class="line">                                 └─ Parent.jsx (부모)</span><br><span class="line">                                 └─ Left_Child.jsx (왼쪽 자식)</span><br><span class="line">                                 └─ Right_Child.jsx (오른쪽 자식)</span><br><span class="line">      ... 이하 생략 ...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Root.jsx는 명목상 01번의 전체 결과를 묶기 위한 컴포넌트입니다. 여기서 Parent.jsx가 존재하며 해당 자식 컴포넌트로  Left_Child , Right_Child를 갖고 있습니다. 자세한 코드는 아래와 같습니다.</li>
+</ul>
+<h5 id="Root-jsx"><a href="#Root-jsx" class="headerlink" title="Root.jsx"></a>Root.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import Parent from &quot;./components/Parent&quot;;</span><br><span class="line">import &apos;../app.css&apos;;</span><br><span class="line"></span><br><span class="line">export default function Root() &#123;</span><br><span class="line">    return(</span><br><span class="line">        &lt;Parent/&gt;</span><br><span class="line">        // Parent 컴포넌트를 렌더링 합니다.</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Parent-jsx"><a href="#Parent-jsx" class="headerlink" title="Parent.jsx"></a>Parent.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-1"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-1" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">import React , &#123;useState&#125; from &apos;react&apos;;</span><br><span class="line">import Left_Child from &quot;./Left_Child&quot;;</span><br><span class="line">import Right_Child from &quot;./Right_Child&quot;;</span><br><span class="line">// React 관련 모듈과 Left_Child , Right_Child 컴포넌트를 불러옵니다.</span><br><span class="line"></span><br><span class="line">export default function Parent() &#123;</span><br><span class="line"></span><br><span class="line">    const [owner , setOwner] = useState(&apos;parent&apos;);</span><br><span class="line">    // useState 함수는 react hooks에서 state를 설정하는 함수입니다.</span><br><span class="line">    // useState의 파라메터는 초기값을 의미합니다.</span><br><span class="line">    // const [owner , setOwner] 에서 첫번째 owner는 상태명 , setOwner는 상태변환 함수명입니다.</span><br><span class="line"></span><br><span class="line">    const onClickParentToLeft = () =&gt; &#123;</span><br><span class="line">    // 공을 부모 컴포넌트가 갖고 있다면 공의 주인을 left 컴포넌트로 변경</span><br><span class="line">        if(owner == &apos;parent&apos;)</span><br><span class="line">            setOwner(&apos;left&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickParentToRight = () =&gt; &#123;</span><br><span class="line">    // 공을 부모 컴포넌트가 갖고 있다면 공의 주인을 right 컴포넌트로 변경</span><br><span class="line">        if(owner == &apos;parent&apos;)</span><br><span class="line">            setOwner(&apos;right&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;table className=&#123;&apos;parent-table&apos;&#125;&gt;</span><br><span class="line">            &lt;tbody&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td colSpan=&#123;2&#125;&gt;</span><br><span class="line">                        Parent</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &lt;div className=&#123;&apos;ball&apos;&#125; style=&#123;&#123;visibility: owner == &apos;parent&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">                        // owner 값을 통해 ball 모양인 div의 visibility 속성을 제어합니다.</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &lt;button onClick=&#123;onClickParentToLeft&#125; className=&#123;&apos;btn-parent-to-left&apos;&#125;&gt;Pass to Left_Child&lt;/button&gt;</span><br><span class="line">                        // 부모 컴포넌트에서 Left_Child 컴포넌트로 공을 전달하는 버튼입니다.</span><br><span class="line">                        &lt;button onClick=&#123;onClickParentToRight&#125; className=&#123;&apos;btn-parent-to-right&apos;&#125;&gt;Pass to Right_Child&lt;/button&gt;</span><br><span class="line">                        // 부모 컴포넌트에서 Right_Child 자식 컴포넌트로 공을 전달하는 버튼입니다.</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td className=&#123;&apos;left-table&apos;&#125;&gt;</span><br><span class="line">                        &lt;Left_Child owner=&#123;owner&#125; setOwner=&#123;setOwner&#125;/&gt;</span><br><span class="line">                        // Left_Child 컴포넌트에 owner 상태와 상태변화 함수인 setOwner를 넘깁니다.</span><br><span class="line">                        // setOwner 함수를 통해 owner의 값이 변경되면 다시 렌더링이 됩니다.</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                    &lt;td className=&#123;&apos;right-table&apos;&#125;&gt;</span><br><span class="line">                        &lt;Right_Child owner=&#123;owner&#125; setOwner=&#123;setOwner&#125;/&gt;</span><br><span class="line">                        // Left_Child 컴포넌트에 owner 상태와 상태변화 함수인 setOwner를 넘깁니다.</span><br><span class="line">                        // setOwner 함수를 통해 owner의 값이 변경되면 다시 렌더링이 됩니다.</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">            &lt;/tbody&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Left-Child-jsx"><a href="#Left-Child-jsx" class="headerlink" title="Left_Child.jsx"></a>Left_Child.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-2"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-2" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">// 리액트 모듈을 불러옵니다.</span><br><span class="line"></span><br><span class="line">export default function Left_Child(&#123;owner , setOwner&#125;) &#123;</span><br><span class="line">// 부모로부터 props를 전달받습니다. props는 부모에게 받는 값을 의미합니다.</span><br><span class="line">// 현재 owner와 setOwner를 받았습니다. owner를 통해 현재 공의 주인을 알 수 있으며</span><br><span class="line">// 만약 해당 컴포넌트가 공을 갖고 있는 상태에서 다른 컴포넌트에게 공을 줄 경우</span><br><span class="line">// Call Back 함수인 setOwner를 호출하여 부모의 owner상태를 변경할 수 있습니다.</span><br><span class="line"></span><br><span class="line">    const onClickChildToParent = () =&gt; &#123;</span><br><span class="line">    // 공을 왼쪽 자식 컴포넌트가 갖고 있다면 공의 주인을 부모 컴포넌트로 변경</span><br><span class="line">        if(owner == &apos;left&apos;)</span><br><span class="line">            setOwner(&apos;parent&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickRightToLeft = () =&gt; &#123;</span><br><span class="line">    // 공을 왼쪽 자식 컴포넌트가 갖고 있다면 공의 주인을 오른쪽 자식 컴포넌트로 변경</span><br><span class="line">        if(owner == &apos;left&apos;)</span><br><span class="line">            setOwner(&apos;right&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;div className=&#123;&apos;child&apos;&#125;&gt;</span><br><span class="line">            &lt;button onClick=&#123;onClickChildToParent&#125; className=&#123;&apos;btn-to-parent&apos;&#125;&gt;Pass to Parent&lt;/button&gt;</span><br><span class="line">            // 왼쪽 자식 컴포넌트에서 부모 컴포넌트로 공을 전달하는 버튼입니다.</span><br><span class="line">            // onClick으로 onClickChildToParent를 호출하며 해당 메서드는 부모로 부터 받은 상태변환 함수인</span><br><span class="line">            // setOwner 메서드를 내부적으로 호출하고 있습니다.</span><br><span class="line">            &lt;br/&gt;</span><br><span class="line">            Left Child</span><br><span class="line">            &lt;br/&gt;</span><br><span class="line">            &lt;div className=&#123;&apos;ball&apos;&#125; style=&#123;&#123;visibility: owner == &apos;left&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">            // owner 값을 통해 ball 모양인 div의 visibility 속성을 제어합니다.</span><br><span class="line">            &lt;button onClick=&#123;onClickRightToLeft&#125; className=&#123;&apos;btn-left-to-right&apos;&#125;&gt;Pass to Right&lt;/button&gt;</span><br><span class="line">            // 왼쪽 자식 컴포넌트에서 오른쪽 자식 컴포넌트로 공을 전달하는 버튼입니다.</span><br><span class="line">            // onClick으로 onClickChildToParent를 호출하며 해당 메서드는 부모로 부터 받은 상태변환 함수인</span><br><span class="line">            // setOwner 메서드를 내부적으로 호출하고 있습니다.</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Right-Child-jsx"><a href="#Right-Child-jsx" class="headerlink" title="Right_Child.jsx"></a>Right_Child.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-3"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-3" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">export default function Right_Child(&#123;owner , setOwner&#125;) &#123;</span><br><span class="line">// Left_Child 컴포넌트 설명과 동일합니다.</span><br><span class="line"></span><br><span class="line">    const onClickChildToParent = () =&gt; &#123;</span><br><span class="line">    // 공을 오른쪽 자식 컴포넌트가 갖고 있다면 공의 주인을 부모 컴포넌트로 변경</span><br><span class="line">        if(owner == &apos;right&apos;)</span><br><span class="line">            setOwner(&apos;parent&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickRightToLeft = () =&gt; &#123;</span><br><span class="line">    // 공을 오른쪽 자식 컴포넌트가 갖고 있다면 공의 주인을 왼쪽 자식 컴포넌트로 변경</span><br><span class="line">        if(owner == &apos;right&apos;)</span><br><span class="line">            setOwner(&apos;left&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;div className=&#123;&apos;child&apos;&#125;&gt;</span><br><span class="line">            &lt;button onClick=&#123;onClickChildToParent&#125; className=&#123;&apos;btn-to-parent&apos;&#125;&gt;Pass to Parent&lt;/button&gt;</span><br><span class="line">            // 오른쪽 자식 컴포넌트에서 부모 컴포넌트로 공을 전달하는 버튼입니다.</span><br><span class="line">            // onClick으로 onClickChildToParent를 호출하며 해당 메서드는 부모로 부터 받은 상태변환 함수인</span><br><span class="line">            // setOwner 메서드를 내부적으로 호출하고 있습니다.</span><br><span class="line">            &lt;br/&gt;</span><br><span class="line">            Left Child</span><br><span class="line">            &lt;br/&gt;</span><br><span class="line">            &lt;div className=&#123;&apos;ball&apos;&#125; style=&#123;&#123;visibility: owner == &apos;right&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">            // owner 값을 통해 ball 모양인 div의 visibility 속성을 제어합니다.</span><br><span class="line">            &lt;button onClick=&#123;onClickRightToLeft&#125; className=&#123;&apos;btn-right-to-left&apos;&#125;&gt;Pass to Left&lt;/button&gt;</span><br><span class="line">            // 오른쪽 자식 컴포넌트에서 왼쪽 자식 컴포넌트로 공을 전달하는 버튼입니다.</span><br><span class="line">            // onClick으로 onClickChildToParent를 호출하며 해당 메서드는 부모로 부터 받은 상태변환 함수인</span><br><span class="line">            // setOwner 메서드를 내부적으로 호출하고 있습니다.</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h5><p><img src="/images/react/parameters_callback_summary.png" alt="01. 단방향 props 전달 및 부모 컴포넌트의 Call Back 함수 전체 개념도"></p>
+<ul>
+<li>Parent는 Left_Child , Right_Child 컴포넌트에게 본인의 상태인 owner와 owner 상태를 변경할 수 있는 setOwner를 자식들에게 props를 전달하며 특정 로직에 의해 setOwner를 호출하여 하나의 상태값을 3개의 컴포넌트가 공유하며 본인의 공인지 아닌지의 여부를 판단하여 UI상 사용자에게 공을 이동시키는 표현을 할수 있게 됩니다.</li>
+</ul>
+<h3 id="02-Context-API를-활용한-전역상태-관리"><a href="#02-Context-API를-활용한-전역상태-관리" class="headerlink" title="02. Context API를 활용한 전역상태 관리"></a>02. Context API를 활용한 전역상태 관리</h3><h4 id="폴더명-“02-Context-API”"><a href="#폴더명-“02-Context-API”" class="headerlink" title="[폴더명 : “02. Context API”]"></a>[폴더명 : “02. Context API”]</h4><ul>
+<li>위의 예제는 컴포넌트들 간의 상태를 전달 및 공유하는 방법에 대해 알아보았습니다. 그러나 위의 방식은  컴포넌트들간에 공유를 위한 Call Back 함수를 props로 전달해야하며 이는 컴포넌트의 부모와 자식 관계가 점차 깊어질 경우 상당히 복잡해지며 코드가 난잡해진다는 단점이 있습니다.</li>
+</ul>
+<p><img src="/images/react/context_API_01.png" alt="Component로 상태공유"></p>
+<ul>
+<li>위의 사진을 보면 A ~ G까지 컴포넌트가 존재합니다. 여기서 C와 G가 특정 상태를 공유하는 방법으로 위와 같은 방법으로 한다면 A 컴포넌트에서 state와 관련된 정보를 내려줘야 합니다. 이런 경우 중간에 존재하는 컴포넌트들에게도 코드상 영향을 미치게 되며 관리가 어려워집니다.</li>
+</ul>
+<p><img src="/images/react/context_API_02.png" alt="Context API로 상태공유"></p>
+<ul>
+<li><p>만약 전역적으로 컴포넌트들에게 상태를 전달하며 해당 상태를 변경할 수 있다면 중간에 존재하는 컴포넌트들에게 영향이 없을 것입니다. 이러한 전역적인 상태관리 방법으로 Context API가 존재합니다.</p>
+</li>
+<li><p>먼저 파일구조를 보도록 하겠습니다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">chapter02_react_component(본 글의 root  경로)</span><br><span class="line">      └─ src</span><br><span class="line">          └─ 02. Context API </span><br><span class="line">                        └─ Root.jsx</span><br><span class="line">                        └─ components</span><br><span class="line">                                 └─ Parent.jsx (부모)</span><br><span class="line">                                 └─ Left_Child.jsx (왼쪽 자식)</span><br><span class="line">                                 └─ Right_Child.jsx (오른쪽 자식)</span><br><span class="line">                        └─ context</span><br><span class="line">                                 └─ OwnerContext.jsx (전역상태 컴포넌트)</span><br><span class="line">      ... 이하 생략 ...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>01번 예제와는 다르게 “context”라는 폴더가 추가되었으며 아래에 OwnerContext.jsx 파일이 추가가 되었습니다. OwnerContext 컴포넌트는  Parent, Left_Child, Right_Child 컴포넌트가 전역적으로 사용하는 상태값을 갖고 있습니다. 코드를 통해 알아보겠습니다. </li>
+</ul>
+<h5 id="Root-jsx-1"><a href="#Root-jsx-1" class="headerlink" title="Root.jsx"></a>Root.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-4"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-4" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import Parent from &quot;./components/Parent&quot;;</span><br><span class="line">import OwnerContext from &quot;./components/context/OwnerContext&quot;</span><br><span class="line">// OwnerContext 컴포넌트를 import합니다. 해당 컴포넌트에서 전역으로</span><br><span class="line">// 사용하는 상태값을 갖고 있습니다.</span><br><span class="line"></span><br><span class="line">import &apos;../app.css&apos;;</span><br><span class="line"></span><br><span class="line">export default function Root() &#123;</span><br><span class="line">    return(</span><br><span class="line">        &lt;OwnerContext&gt;</span><br><span class="line">            &lt;Parent/&gt;</span><br><span class="line">        &lt;/OwnerContext&gt;</span><br><span class="line">        // 위의 01번 예제와는 다르게 OwnerContext 컴포넌트 태그로 Parent 컴포넌트가</span><br><span class="line">        // 감싸져 있습니다. 이는 OwnerContext의 props 중에 children 이라는 프로퍼티로</span><br><span class="line">        // Parent 컴포넌트가 전달됩니다.</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="OwnerContext-jsx"><a href="#OwnerContext-jsx" class="headerlink" title="OwnerContext.jsx"></a>OwnerContext.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-5"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-5" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import React ,&#123; createContext , useState &#125; from &apos;react&apos;;</span><br><span class="line">// createContext 를 import 합니다. 이는 전역적으로 사용할 Context를 생성할 수</span><br><span class="line">// 있도록 해줍니다.</span><br><span class="line"></span><br><span class="line">const Context = createContext(&#123;</span><br><span class="line">    owner : undefined,</span><br><span class="line">    setOwner : undefined</span><br><span class="line">&#125;);</span><br><span class="line">// Context라는 변수명으로 Context를 생성하였습니다.</span><br><span class="line"></span><br><span class="line">export default function OwnerContext(&#123;children&#125;) &#123;</span><br><span class="line">// Root.jsx 파일에서 Root 컴포넌트가 OwnerContext 컴포넌트 태그로 감싸져 있었습니다.</span><br><span class="line">// 해당 Root 컴포넌트는 children 이라는 필드명으로 값이 전달됩니다.</span><br><span class="line"></span><br><span class="line">    const [owner , setOwner] = useState(&apos;parent&apos;);</span><br><span class="line">    // useState을 통해  상태값 owner와 변환함수 setOwner를 설정합니다. </span><br><span class="line">    // 해당 상태정보를 Context 에게 넘기게 됩니다/</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;Context.Provider value=&#123;&#123;owner : owner , setOwner : setOwner&#125;&#125;&gt;</span><br><span class="line">            &#123;children&#125;</span><br><span class="line">        &lt;/Context.Provider&gt;</span><br><span class="line">        // Context.Provider 는 해당 내부에 있는 컴포넌트들에게 value를 전달합니다.</span><br><span class="line">        // 이는 Provider 태그로 감싸져 있으며 children 넘어오는 전달 되는 Parent ,Left_Child ,Right_Child</span><br><span class="line">        // 컴포넌트들에게 전달됩니다. </span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export &#123;Context&#125;;</span><br><span class="line">// 해당 export는 다른 컴포넌트에서 Context 값에 접근하기 위해 export를 해줍니다.</span><br></pre></td></tr></table></figure>
+
+<h5 id="Parent-jsx-1"><a href="#Parent-jsx-1" class="headerlink" title="Parent.jsx"></a>Parent.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-6"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-6" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useContext &#125; from &apos;react&apos;;</span><br><span class="line">import Left_Child from &quot;./Left_Child&quot;;</span><br><span class="line">import Right_Child from &quot;./Right_Child&quot;;</span><br><span class="line">import &#123;Context&#125; from &quot;./context/OwnerContext&quot;</span><br><span class="line">// 나머지는 01번 예제와 같습니다. 다만 OwnerContext.jsx에서 마지막에</span><br><span class="line">// export를 해준 Context를 불러와 줍니다. 해당 Context는 react의</span><br><span class="line">// useContext를 이용하여 사용할 수 있습니다.</span><br><span class="line"></span><br><span class="line">export default function Parent() &#123;</span><br><span class="line"></span><br><span class="line">    const context = useContext(Context);</span><br><span class="line">    // react의 useContext를 사용하여 &quot;context&quot;라는 변수명에 Context를 설정합니다.</span><br><span class="line">    // 이제 Parent 컴포넌트 내에서 &quot;context&quot;라는 변수명으로 Context를에 접근할 수 있습니다.</span><br><span class="line"></span><br><span class="line">    const onClickParentToLeft = () =&gt; &#123;</span><br><span class="line">    // Provider의 value로 전달한 owner 값을 비교를 합니다.</span><br><span class="line">        if(context.owner == &apos;parent&apos;)</span><br><span class="line">            context.setOwner(&apos;left&apos;);</span><br><span class="line">            // owner를 변경할 경우 같이 넘긴 setOwner 메서드를 활용합니다.</span><br><span class="line">            // 해당 메서드를 통해 OwnerContext에서 Context.Provider에게 넘겨준</span><br><span class="line">            // owner 를 변경할 수 있습니디.</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickParentToRight = () =&gt; &#123;</span><br><span class="line">    // Provider의 value로 전달한 owner 값을 비교를 합니다.</span><br><span class="line">        if(context.owner == &apos;parent&apos;)</span><br><span class="line">            context.setOwner(&apos;right&apos;);</span><br><span class="line">            // owner를 변경할 경우 같이 넘긴 setOwner 메서드를 활용합니다.</span><br><span class="line">            // 해당 메서드를 통해 OwnerContext에서 Context.Provider에게 넘겨준</span><br><span class="line">            // owner 를 변경할 수 있습니디.</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;table className=&#123;&apos;parent-table&apos;&#125;&gt;</span><br><span class="line">            &lt;tbody&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td colSpan=&#123;2&#125;&gt;</span><br><span class="line">                        Parent</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &lt;div className=&#123;&apos;ball&apos;&#125; style=&#123;&#123;visibility: context.owner == &apos;parent&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">                        // Context API인 context의 owner 값을 비교하여 visibility 속성을 정합니다.</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &lt;button onClick=&#123;onClickParentToLeft&#125; className=&#123;&apos;btn-parent-to-left&apos;&#125;&gt;Pass to Left_Child&lt;/button&gt;</span><br><span class="line">                        &lt;button onClick=&#123;onClickParentToRight&#125; className=&#123;&apos;btn-parent-to-right&apos;&#125;&gt;Pass to Right_Child&lt;/button&gt;</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td className=&#123;&apos;left-table&apos;&#125;&gt;</span><br><span class="line">                        &lt;Left_Child/&gt;</span><br><span class="line">                        // 위의 01번 예제에서는 props를 전달하였지만 Context API를 활용하면 해당 props 전달 코드를</span><br><span class="line">                        // 사용하지 않고 전역적으로 상태를 관리할 수 있습니다. 즉, 현재 컴포넌트인 Parent 컴포넌트와</span><br><span class="line">                        // 동일하게 Context와 react의 useContext를 사용하여 각 컴포넌트에서 해당 Context를 사용할</span><br><span class="line">                        // 수 있습니다.</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                    &lt;td className=&#123;&apos;right-table&apos;&#125;&gt;</span><br><span class="line">                        &lt;Right_Child/&gt;</span><br><span class="line">                        // 위의 Left_Child 컴포넌트와 내용이 동일합니다.</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">            &lt;/tbody&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Left-Child-jsx-1"><a href="#Left-Child-jsx-1" class="headerlink" title="Left_Child.jsx"></a>Left_Child.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-7"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-7" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><h6 id="Right-Child-jsx는-Left-Child-jsx에서-판단로직만-“right”로-변경이-되기에-코드를-생략합니다"><a href="#Right-Child-jsx는-Left-Child-jsx에서-판단로직만-“right”로-변경이-되기에-코드를-생략합니다" class="headerlink" title="Right_Child.jsx는 Left_Child.jsx에서 판단로직만 “right”로 변경이 되기에 코드를 생략합니다."></a>Right_Child.jsx는 Left_Child.jsx에서 판단로직만 “right”로 변경이 되기에 코드를 생략합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useContext &#125; from &apos;react&apos;;</span><br><span class="line">import &#123;Context&#125; from &quot;./context/OwnerContext&quot;</span><br><span class="line">// Left_Child 컴포넌트 내에서 Context 를 사용하기 위해</span><br><span class="line">// Parent 컴포넌트와 동일하게 useContext와 Context를 import 합니다.</span><br><span class="line"></span><br><span class="line">export default function Left_Child(&#123;owner = null&#125;) &#123;</span><br><span class="line"></span><br><span class="line">    const context = useContext(Context);</span><br><span class="line">    // 전역 Context를 활용하기 위해 Parent와 동일하게 설정합니다.</span><br><span class="line"></span><br><span class="line">    const onClickChildToParent = () =&gt; &#123;</span><br><span class="line">    // Parent 컴포넌트와 동일하게 &quot;context&quot; 변수명으로 Context에 접근하여</span><br><span class="line">    // value로 설정된 값들에게 접근합니다.</span><br><span class="line">        if(context.owner == &apos;left&apos;)</span><br><span class="line">            context.setOwner(&apos;parent&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickRightToRight = () =&gt; &#123;</span><br><span class="line">    // Parent 컴포넌트와 동일하게 &quot;context&quot; 변수명으로 Context에 접근하여</span><br><span class="line">    // value로 설정된 값들에게 접근합니다.</span><br><span class="line">        if(context.owner == &apos;left&apos;)</span><br><span class="line">            context.setOwner(&apos;right&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;div className=&#123;&apos;child&apos;&#125;&gt;</span><br><span class="line">            &lt;button onClick=&#123;onClickChildToParent&#125; className=&#123;&apos;btn-to-parent&apos;&#125;&gt;Pass to Parent&lt;/button&gt;</span><br><span class="line">            &lt;br/&gt;</span><br><span class="line">            Left Child</span><br><span class="line">            &lt;br/&gt;</span><br><span class="line">            &lt;div className=&#123;&apos;ball&apos;&#125; style=&#123;&#123;visibility: context.owner == &apos;left&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">            // Context API인 context의 owner 값을 비교하여 visibility 속성을 정합니다.</span><br><span class="line">            &lt;button onClick=&#123;onClickRightToRight&#125; className=&#123;&apos;btn-left-to-right&apos;&#125;&gt;Pass to Right&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="정리-1"><a href="#정리-1" class="headerlink" title="정리"></a>정리</h5><p><img src="/images/react/context_API_03.png" alt="02. Context API를 활용한 전역상태 관리 전체 개념도"></p>
+<ul>
+<li>위의 그림을 보시면 모든 컴포넌트들의 부모인 OwnerContext 컴포넌트가 있으며 해당 컴포넌트에서 전역적으로 사용할 상태와 관련된 정보를 설정합니다. 이를 내부적으로 Context API에게 전달하여 다른 컴포넌트들이 전역적으로 사용할 수 있도록 제공을 합니다. 이때 만약 전역적으로 사용할 상태에 대해 변경을 원한다면 Context API에게 제공한 setOwner 메서드를 사용하여 전역상태를 변경시키는 구조입니다. 현재는 컴포넌트가 3~4개 이므로 Context API가 01번 예제 보다 더욱 코드가 복잡해 보이지만 컴포넌트의 수가 늘어나거나 전역적으로 관리해야할 상태가 늘어날 수록 Context API와 같은 전역적으로 상태를 관리해주는 기능들이 빛을 보게 됩니다.</li>
+</ul>
+<h3 id="03-Redux를-활용한-전역상태-관리"><a href="#03-Redux를-활용한-전역상태-관리" class="headerlink" title="03. Redux를 활용한 전역상태 관리"></a>03. Redux를 활용한 전역상태 관리</h3><h4 id="폴더명-“03-Redux”"><a href="#폴더명-“03-Redux”" class="headerlink" title="[폴더명 : “03. Redux”]"></a>[폴더명 : “03. Redux”]</h4><ul>
+<li>지금부터 설명할 Redux는 추가적인 모듈을 설치해야합니다. 만약 github에서 소스를 다운로드 받으셨다면 이미 package.json에 들어있습니다. 만약 안되어 있다면 아래의 명령어를 실행해주세요.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install redux react-redux;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>redux는 react에 종속되어 있는 모듈이 아닙니다. redux는 자바스크립트 애플리케이션 state container 입니다. 때문에 다른 자바스크립트 어플리케이션에서도 사용을 할 수 있습니다. </p>
+</li>
+<li><p>react-redux는 redux와 react UI와의 바인딩을 해주는 모듈입니다. 즉 , redux에서 관라하는 상태값을 변경하면 react 컴포넌트가 다시 Rendering 됩니다.</p>
+</li>
+<li><p>파일구조로 넘어가기 전에 redux의 기본적인 원리에 대해 알아도록 하겠습니다.</p>
+</li>
+</ul>
+<p><img src="/images/react/redux_01.png" alt="redux 개념도"></p>
+<ul>
+<li><p>위의 그림의 화살표는 react 상태를 변화시켜 View를 변경하는 redux의 흐름도입니다. 사용자가 View에서 특정 이벤트를 통하면 Action을 생성하여 Reducer로 전달이 됩니다. 해당 Reducer는 전달받은 Action의 type을 판단하며 해당하는 Store의 값이 변경이됩니다. 이렇게 변화한 Store의 값은 다시 View에 값을 변경시키게 됩니다.</p>
+</li>
+<li><p>redux의 특징으로는 단일 Store를 갖고 있습니다. 그러나 Action과 Reducer는 다수가 될 수 있습니다. 또한 양방향이 아닌 단방향으로만 흐름도를 갖고 있습니다.</p>
+</li>
+</ul>
+<p><img src="/images/react/redux_02.png" alt="redux 개념도"></p>
+<ul>
+<li><p>컴포넌트 입장에서 그림은 위와 같습니다. C 컴포넌트에서 특정 action을 dispatch하며 해당 action을 통해 reducer는 store에 있는 어떤 상태를 어떻게 변경해야 할지 판단하고 상태를 변경하게 됩니다. 이에 store는 값이 변경되면 해당 상태를 subscribe(구독)하고 있는 컴포넌트인 G에게 값의 변화를 주게 됩니다. </p>
+</li>
+<li><p>이제 파일구조를 보도록 하겠습니다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">chapter02_react_component(본 글의 root  경로)</span><br><span class="line">      └─ src</span><br><span class="line">          └─ 03. Redux</span><br><span class="line">                └─ Root.jsx</span><br><span class="line">                └─ components</span><br><span class="line">                         └─ Parent.jsx (부모)</span><br><span class="line">                         └─ Left_Child.jsx (왼쪽 자식)</span><br><span class="line">                         └─ Right_Child.jsx (오른쪽 자식)</span><br><span class="line">                └─ reduxModule</span><br><span class="line">                         └─ ballReducer.js (ball 관련된 리듀서)</span><br><span class="line">                         └─ index.js (여러 리듀서를 통합하는 파일)</span><br><span class="line">      ... 이하 생략 ...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>위의 01번 02번 예제와 다르게 파일구조적으로 “reduxModule”라는 폴더가 존재합니다. 해당 폴더 아래에는 액션 , 액션생성 함수 , 리듀서가 존재합니다. 바로 코드를 보도록 하겠습니다.</li>
+</ul>
+<h5 id="Root-jsx-2"><a href="#Root-jsx-2" class="headerlink" title="Root.jsx"></a>Root.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-8"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-8" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import Parent from &quot;./components/Parent&quot;;</span><br><span class="line">import &#123; createStore &#125; from &quot;redux&quot;;</span><br><span class="line">import reduxModule from &apos;./reduxModule&apos;</span><br><span class="line">// 파일구조에서 &quot;reduxModule&quot;라는 폴더가 있었습니다.</span><br><span class="line">// 해당 폴더로 import를 하면 기본적으로 index 파일을 import 합니다.</span><br><span class="line">import &#123;Provider&#125; from &apos;react-redux&apos;;</span><br><span class="line">// react-redux의 Provider를 통해 redux의 값이 전달됩니다.</span><br><span class="line">import &apos;../app.css&apos;;</span><br><span class="line"></span><br><span class="line">const store = createStore(reduxModule);</span><br><span class="line">// 위에서 설명하였듯이 &quot;reduxModule&quot; 폴더를 import 하였기에 index 파일이</span><br><span class="line">// createStore의 파라메터로 전달됩니다. 해당 파일에는 Reducer가 있습니다.</span><br><span class="line">// Reducer의 정보를 바탕으로 store를 생성합니다.</span><br><span class="line"></span><br><span class="line">export default function Root() &#123;</span><br><span class="line">    return(</span><br><span class="line">        &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">        // react-redux 모듈에 있는 Provider입니다.</span><br><span class="line">        // 해당 Provider에 전역으로 사용할 store를 지정합니다.</span><br><span class="line">            &lt;Parent/&gt;</span><br><span class="line">        &lt;/Provider&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-9"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-9" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import &#123; combineReducers &#125; from &apos;redux&apos;;</span><br><span class="line">// redux 모듈에 combineReducers를 import 합니다.</span><br><span class="line">// 프로젝트 규모가 커지며 많은 리듀서를 제작하게 됩니다.</span><br><span class="line">// 이때 combineReducers는 다수의 Reducer는 하나로</span><br><span class="line">// 묶어주는 역할을 합니다.</span><br><span class="line">import ballReducer from &apos;./BallReducer&apos;;</span><br><span class="line">// 리듀서를 import 합니다.</span><br><span class="line"></span><br><span class="line">export default combineReducers(&#123;</span><br><span class="line">    ballReducer,</span><br><span class="line">&#125;);</span><br><span class="line">// 여러개의 Reducer는 등록할 경우에 구분자 &quot;,&quot; 를 통해</span><br><span class="line">// 다수의 Reducer를 등록하면 됩니다.</span><br></pre></td></tr></table></figure>
+
+<h5 id="ballReducer-js"><a href="#ballReducer-js" class="headerlink" title="ballReducer.js"></a>ballReducer.js</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-10"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-10" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">const CHANGE_OWNER = &apos;BALL/CHAGNE/OWNER&apos;;</span><br><span class="line">// 액션 type을 지정합니다. 해당 타입은 리듀서에서 체크를 합니다. </span><br><span class="line"></span><br><span class="line">export const getActionChangeOwner = (owner) =&gt; (&#123;</span><br><span class="line">    type: CHANGE_OWNER,</span><br><span class="line">    owner : owner</span><br><span class="line">&#125;);</span><br><span class="line">// 액션 생성함수 입니다. type이라는 필드명으로 위에서 정의한 액션 type이 들어갑니다.</span><br><span class="line">// 파라메터로 owner를 받아 owner에 설정되고 있습니다. 해당 액션 정보로 리듀서에서</span><br><span class="line">// 값을 변경합니다. 해당 생성함수는 컴포넌트들 파일에서 사용하도록 export 해줍니다.</span><br><span class="line"></span><br><span class="line">const initialState = &#123;</span><br><span class="line">    owner: &apos;parent&apos;</span><br><span class="line">&#125;;</span><br><span class="line">// redux의 초기값 설정입니다.</span><br><span class="line"></span><br><span class="line">export default function ballReducer(state = initialState, action) &#123;</span><br><span class="line">// 마지막으로 리듀서이며 해당 리듀서는 default로 export 해줍니다.</span><br><span class="line">// 파라메터로 state와 action이 있습니다.</span><br><span class="line">// state은 현재 store에 있는 값이 들어오며 action은 위에서 정의한 액션 생성함수에 의해</span><br><span class="line">// 만들어진 액션이 넘어옵니다.</span><br><span class="line"></span><br><span class="line">    switch (action.type) &#123;</span><br><span class="line">        case CHANGE_OWNER:</span><br><span class="line">            return &#123;</span><br><span class="line">                ...state,</span><br><span class="line">                owner: action.owner,</span><br><span class="line">            &#125;;</span><br><span class="line">        default:</span><br><span class="line">            return state;</span><br><span class="line">    &#125;</span><br><span class="line">    // switch문으로 action의 type을 체크합니다. 해당 체크에 따라 return 되는 값이 다릅니다.</span><br><span class="line">    // 여기서 return 되는 로직에 의해 store의 값이 변경됩니다.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Parent-jsx-2"><a href="#Parent-jsx-2" class="headerlink" title="Parent.jsx"></a>Parent.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-11"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-11" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import Left_Child from &quot;./Left_Child&quot;;</span><br><span class="line">import Right_Child from &quot;./Right_Child&quot;;</span><br><span class="line">import &#123;connect&#125; from &quot;react-redux&quot;;</span><br><span class="line">// react와 redux를 연결해주는 connect 모듈을 import 합니다.</span><br><span class="line">import  * as ballReducer from &quot;../reduxModule/ballReducer&quot;;</span><br><span class="line">// &quot;reduxModule&quot; 폴더 아래에 ballReducer.jsx 파일의 export된 모든 요소를 import 합니다.</span><br><span class="line">// ballReducer.xxxx 처럼 해당 요소에 접근할 수 있습니다.</span><br><span class="line"></span><br><span class="line">function Parent(&#123;owner , changeOwner&#125;) &#123;</span><br><span class="line">// 파라메터 값으로 owner와 changeOwner가 넘어오고 있습니다. 해당 부분의 넘어오는 값에 대한</span><br><span class="line">// 설정은 밑에  mapStateToProps, mapDispatchToProps 함수로 정의되어 있습니다.</span><br><span class="line">// owner는 store로 부터 subscribe(구독)하여 넘어오는 상태값입니다.</span><br><span class="line">// changeOwner는 해당 상태를 변경할 dispatch가 넘어옵니다.</span><br><span class="line"></span><br><span class="line">    const onClickParentToLeft = () =&gt; &#123;</span><br><span class="line">    // 공을 parent가 갖고 있다면 changeOwner 함수를 호출하여 owner 상태를</span><br><span class="line">    // left로 변환합니다. 밑에 mapDispatchToProps 설정을 보시면 아시겠지만</span><br><span class="line">    // changeOwner 함수는 내부적으로 dispatch 함수를 호출합니다.</span><br><span class="line">        if(owner == &apos;parent&apos;)</span><br><span class="line">            changeOwner(&apos;left&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickParentToRight = () =&gt; &#123;</span><br><span class="line">    // 공을 parent가 갖고 있다면 changeOwner 함수를 호출하여 owner 상태를</span><br><span class="line">    // left로 변환합니다. 밑에 mapDispatchToProps 설정을 보시면 아시겠지만</span><br><span class="line">    // changeOwner 함수는 내부적으로 dispatch 함수를 호출합니다.</span><br><span class="line">        if(owner == &apos;parent&apos;)</span><br><span class="line">            changeOwner(&apos;right&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;table className=&#123;&apos;parent-table&apos;&#125;&gt;</span><br><span class="line">            &lt;tbody&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td colSpan=&#123;2&#125;&gt;</span><br><span class="line">                        Parent</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &lt;div className=&#123;&apos;ball&apos;&#125; att=&#123;owner&#125; style=&#123;&#123;visibility: owner == &apos;parent&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">                        // store에 구독중인 owner의 값을 통해 visibility 를 제어합니다.</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &lt;button onClick=&#123;onClickParentToLeft&#125; className=&#123;&apos;btn-parent-to-left&apos;&#125;&gt;Pass to Left_Child&lt;/button&gt;</span><br><span class="line">                        &lt;button onClick=&#123;onClickParentToRight&#125; className=&#123;&apos;btn-parent-to-right&apos;&#125;&gt;Pass to Right_Child&lt;/button&gt;</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td className=&#123;&apos;left-table&apos;&#125;&gt;</span><br><span class="line">                        &lt;Left_Child/&gt;</span><br><span class="line">                    // store에서 상태를 관리하므로 props로 내려줄 필요가 없습니다.</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                    &lt;td className=&#123;&apos;right-table&apos;&#125;&gt;</span><br><span class="line">                        &lt;Right_Child/&gt;</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">            &lt;/tbody&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps = dispatch =&gt; (&#123;</span><br><span class="line">    changeOwner : (owner) =&gt; &#123;</span><br><span class="line">        dispatch(ballReducer.getActionChangeOwner(owner));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">// dispatch를 개발자가 원하는 로직별로 Mapping하는 설정부분입니다.</span><br><span class="line">// 파라메터로 dispatch가 넘어옵니다. 해당 부분에 수행하고자 하는 action을 넘기면</span><br><span class="line">// reducer에서 해당 action을 판단하여 store의 상태를 업데이트 합니다.</span><br><span class="line">// 해당 메서드는 아래에 connect 함수의 파라메터로 들어갑니다.</span><br><span class="line">// 여기서 정의된 changeOwner가 위의 컴포넌트 파라메터로 다시 들어가게 됩니다.</span><br><span class="line"></span><br><span class="line">const mapStateToProps = (state) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        owner: state.ballReducer.owner</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">// subscribe(구독) 을 통해 받을 값을 정의합니다.</span><br><span class="line">// state 파라메터를 통해 넘어온 값을 onwer에 값을 다시 셋팅합니다.</span><br><span class="line">// 셋팅한 onwer는 위에서 props로 받고 있는 owner로 값이 들어오게 됩니다.</span><br><span class="line">// 위의 state.ballReducer.owner는 state.[combinreducer를 한 reducer].[설정한 상태값] 입니다.</span><br><span class="line"></span><br><span class="line">export default connect(mapStateToProps,mapDispatchToProps)(Parent);</span><br><span class="line">// 구독 및 디스패치 함수의 셋팅과 parent 컴포넌트의 설정을 통해 store와 연결됩니다.</span><br></pre></td></tr></table></figure>
+
+<h5 id="Left-Child-jsx-2"><a href="#Left-Child-jsx-2" class="headerlink" title="Left_Child.jsx"></a>Left_Child.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-12"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-12" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><h6 id="Right-Child-jsx는-Left-Child-jsx에서-판단로직만-“right”로-변경이-되기에-코드를-생략합니다-1"><a href="#Right-Child-jsx는-Left-Child-jsx에서-판단로직만-“right”로-변경이-되기에-코드를-생략합니다-1" class="headerlink" title="Right_Child.jsx는 Left_Child.jsx에서 판단로직만 “right”로 변경이 되기에 코드를 생략합니다."></a>Right_Child.jsx는 Left_Child.jsx에서 판단로직만 “right”로 변경이 되기에 코드를 생략합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &#123;connect&#125; from &quot;react-redux&quot;;</span><br><span class="line">import  * as ballReducer from &quot;../reduxModule/ballReducer&quot;;</span><br><span class="line">// Parent 컴포넌트와 동일하게 ballReducer와 connect 모듈을 import 합니다.</span><br><span class="line"></span><br><span class="line">function Left_Child(&#123;owner , changeOwner&#125;) &#123;</span><br><span class="line">// Parent 컴포넌트와 동일하게 owner에는 구독중인 상태값이 넘어오며 </span><br><span class="line">// changeOwner에는 dispatch를 할 수 있는 메서드가 넘어옵니다.</span><br><span class="line"></span><br><span class="line">    const onClickChildToParent = () =&gt; &#123;</span><br><span class="line">        if(owner == &apos;left&apos;)</span><br><span class="line">            changeOwner(&apos;parent&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickLeftToRight = () =&gt; &#123;</span><br><span class="line">        if(owner == &apos;left&apos;)</span><br><span class="line">            changeOwner(&apos;right&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;div className=&#123;&apos;child&apos;&#125;&gt;</span><br><span class="line">            &lt;button onClick=&#123;onClickChildToParent&#125; className=&#123;&apos;btn-to-parent&apos;&#125;&gt;Pass to Parent&lt;/button&gt;</span><br><span class="line">            // store에 구독중인 owner의 값을 통해 visibility 를 제어합니다.</span><br><span class="line">            &lt;br/&gt;</span><br><span class="line">            Left Child</span><br><span class="line">            &lt;br/&gt;</span><br><span class="line">            &lt;div className=&#123;&apos;ball&apos;&#125; style=&#123;&#123;visibility: owner == &apos;left&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">            &lt;button onClick=&#123;onClickLeftToRight&#125; className=&#123;&apos;btn-left-to-right&apos;&#125;&gt;Pass to Right&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps = dispatch =&gt; (&#123;</span><br><span class="line">    changeOwner : (owner) =&gt; &#123;</span><br><span class="line">        dispatch(ballReducer.getActionChangeOwner(owner));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">// Parent와 동일하게 dispatch의 Mapping 정보를 정의합니다.</span><br><span class="line"></span><br><span class="line">const mapStateToProps = (state) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        owner: state.ballReducer.owner</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">// Parent와 동일하게 구독 정보를 설정합니다.</span><br><span class="line"></span><br><span class="line">export default connect(mapStateToProps,mapDispatchToProps)(Left_Child);</span><br><span class="line">// Parent와 동일하게 store와 연결합니다.</span><br></pre></td></tr></table></figure>
+
+<h5 id="정리-2"><a href="#정리-2" class="headerlink" title="정리"></a>정리</h5><p><img src="/images/react/redux_03.png" alt="03. Redux를 활용한 전역상태 관리 전체 개념도"></p>
+<ul>
+<li>위의 그림은 03번 예제에 적용한 redux 및 컴포넌트의 전체 개념도 입니다. 단일 Store에 각 컴포넌트가 액션을 디스패치를 함과 동시에 owner에 대해 구독을 하고 있는 상황입니다. 단일 Store에서 owner에 대한 상태를 관리하므로 각 컴포넌트는 각자의 상태를 갖고 있을 이유가 없습니다. 이러한 redux는 Contex API와 동일하게 부모 자식관계가 깊어지더라도 Store에 디스패치 및 구독을 통해 서로 상태를 공유할 수 있습니다.</li>
+</ul>
+<h3 id="04-MobX를-활용한-전역상태-관리"><a href="#04-MobX를-활용한-전역상태-관리" class="headerlink" title="04. MobX를 활용한 전역상태 관리"></a>04. MobX를 활용한 전역상태 관리</h3><h4 id="폴더명-“04-Mobx”"><a href="#폴더명-“04-Mobx”" class="headerlink" title="[폴더명 : “04. Mobx”]"></a>[폴더명 : “04. Mobx”]</h4><ul>
+<li>Mobx를 사용하기 위해서는 Mobx와 관련된 모듈들을 설치해줘야 합니다. 깃허브로 프로젝트를 다운로드 받으셨다면 package.json에 이미 들어가 있습니다. 만약 있지 않다면 아래의 명령어를 실행해주세요.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mobx mobx-react</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>기본적으로 mobx는 install를 해줘야하며 react와 같이 사용하기 위해서는 mobx-react를 추가로 설치해줍니다. mobx-react는 mobx로 설정된 값과 react를 연결하여 값이 변경되면 자동으로 rendering 되도록 해줍니다.</li>
+</ul>
+<p><img src="/images/react/mobx_01.jpg" alt="mobx 개념"></p>
+<ul>
+<li><p>Mobx도 마찬가지로 Action 발생하면 관리하는 state가 변경되며 이는 state와 관련된 정보들도 같이 업데이트가 됩니다.</p>
+</li>
+<li><p>파일구조는 아래와 같습니다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">chapter02_react_component(본 글의 root  경로)</span><br><span class="line">      └─ src</span><br><span class="line">          └─ 03. Redux</span><br><span class="line">                └─ Root.jsx</span><br><span class="line">                └─ components</span><br><span class="line">                         └─ Parent.jsx (부모)</span><br><span class="line">                         └─ Left_Child.jsx (왼쪽 자식)</span><br><span class="line">                         └─ Right_Child.jsx (오른쪽 자식)</span><br><span class="line">                └─ store</span><br><span class="line">                     └─ store.js (Mobx 스토어를 정의)</span><br><span class="line">      ... 이하 생략 ...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>01번 02번 03번 예제와 다르게 “store” 폴더 아래에 store.js 파일이 존재합니다. 해당 파일은 전역으로 사용할 상태를 Mobx로 정의를 해놓은 파일입니다. Mobx는 redux와 다르게 다수의 Store를 정의할 수 있으며 설정이 매우 간단하고 자유롭습니다. 그렇기 때문에 다수의 사람들이 공동으로 프로젝트를 사용할 경우 mobx-state-tree와 같은 틀이 조금더 구체화되어 있는 모듈을 사용하는 것이 좋습니다. 이 강좌에서는 mobx-state-tree를 따로 다루지 않습니다.</li>
+</ul>
+<h6 id="본-글에서-Mobx에-대해-데코레이터를-사용하지-않습니다"><a href="#본-글에서-Mobx에-대해-데코레이터를-사용하지-않습니다" class="headerlink" title="본 글에서 Mobx에 대해 데코레이터를 사용하지 않습니다."></a>본 글에서 Mobx에 대해 데코레이터를 사용하지 않습니다.</h6><h5 id="Root-jsx-3"><a href="#Root-jsx-3" class="headerlink" title="Root.jsx"></a>Root.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-13"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-13" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 해당 파일은 01번 예제와 동일합니다. 즉 , 설정할 부분이 없습니다.</span><br><span class="line">// 물론 mobx-react 모듈에서 Provider를 통해 Contex API 예제 처럼</span><br><span class="line">// 값을 전달할 수 있습니다. 하지만 본 글에서는 간단하게 store에 대해</span><br><span class="line">// import를 통해 사용합니다.</span><br><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import Parent from &quot;./components/Parent&quot;;</span><br><span class="line">import &apos;../app.css&apos;;</span><br><span class="line"></span><br><span class="line">export default function Root() &#123;</span><br><span class="line">    return(</span><br><span class="line">        &lt;Parent/&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="store-js"><a href="#store-js" class="headerlink" title="store.js"></a>store.js</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-14"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-14" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import &#123; observable &#125; from &apos;mobx&apos;</span><br><span class="line">// mobx 모듈에서 observable 모듈을 import 합니다.</span><br><span class="line">// observable 모듈은 관리할 상태에 대해 정의할 수 있게</span><br><span class="line">// 도와줍니다.</span><br><span class="line"></span><br><span class="line">export default observable (&#123;</span><br><span class="line">    owner : &apos;parent&apos;,</span><br><span class="line">    setOwner (owner) &#123;</span><br><span class="line">        this.owner = owner;</span><br><span class="line">        // redux에서는 디스패치로 액션을 넘겨 상태를 변화시켰지만</span><br><span class="line">        // mobx에서는 &quot;=&quot; 키워드를 통해 값을 변경하면 자동으로</span><br><span class="line">        // 해당 상태에 대한 Action이 발생합니다.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">// observable 모듈을 통해 owner와 setOwner에 대해 정의를 했습니다.</span><br><span class="line">// 하지만 실제로 관리가 되는 상태는 owner이며 setOwner는 단순히</span><br><span class="line">// owner를 변경하기 위한 메서드입니다.</span><br></pre></td></tr></table></figure>
+
+<h5 id="Parent-jsx-3"><a href="#Parent-jsx-3" class="headerlink" title="Parent.jsx"></a>Parent.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-15"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-15" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import Left_Child from &quot;./Left_Child&quot;;</span><br><span class="line">import Right_Child from &quot;./Right_Child&quot;;</span><br><span class="line">import Store from &quot;../store/store&quot;;</span><br><span class="line">// owner라는 상태를 갖고 있는 store 모듈을 import 합니다.</span><br><span class="line">import &#123;useObserver&#125; from &quot;mobx-react&quot;</span><br><span class="line">// mobx와 react를 이어주는 모듈입니다.</span><br><span class="line">// store에서 observable로 설정했던 상태들을 useObserver와 연결해주면</span><br><span class="line">// 해당 값이 변경시 react 에도 반영이 됩니다.</span><br><span class="line"></span><br><span class="line">export default function Parent() &#123;</span><br><span class="line"></span><br><span class="line">    const onClickParentToLeft = () =&gt; &#123;</span><br><span class="line">    // 현재 store에 owner 가 parent이면 left로 변경하라는 로직입니다.</span><br><span class="line">        if(Store.owner == &apos;parent&apos;)</span><br><span class="line">            Store.owner = &apos;left&apos;;</span><br><span class="line">    // &quot;=&quot; 키워드를 통해 값을 직접 변경하여도 알아서 Action이 발생하여 값을 변경합니다.</span><br><span class="line">    // 이는 아까 store에서 정의한 setOwner(&apos;left&apos;)를 사용하여도 됩니다.</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickParentToRight = () =&gt; &#123;</span><br><span class="line">        if(Store.owner == &apos;parent&apos;)</span><br><span class="line">            Store.owner = &apos;right&apos;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        // return에서 useObserver 모듈을 사용하여 mobx의 store에 있는 상태값이 변경되면 rendering을 도와줍니다.</span><br><span class="line">        useObserver(() =&gt; (</span><br><span class="line">            &lt;table className=&#123;&apos;parent-table&apos;&#125;&gt;</span><br><span class="line">                &lt;tbody&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td colSpan=&#123;2&#125;&gt;</span><br><span class="line">                        Parent</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &lt;div className=&#123;&apos;ball&apos;&#125; style=&#123;&#123;visibility: Store.owner == &apos;parent&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">                        // store에 있는 owner 값을 통해 visibility 속성을 제어합니다.</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &lt;button onClick=&#123;onClickParentToLeft&#125; className=&#123;&apos;btn-parent-to-left&apos;&#125;&gt;Pass to Left_Child&lt;/button&gt;</span><br><span class="line">                        &lt;button onClick=&#123;onClickParentToRight&#125; className=&#123;&apos;btn-parent-to-right&apos;&#125;&gt;Pass to Right_Child&lt;/button&gt;</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td className=&#123;&apos;left-table&apos;&#125;&gt;</span><br><span class="line">                        &lt;Left_Child/&gt;</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                    &lt;td className=&#123;&apos;right-table&apos;&#125;&gt;</span><br><span class="line">                        &lt;Right_Child/&gt;</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;/tbody&gt;</span><br><span class="line">            &lt;/table&gt;</span><br><span class="line">        ))</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Left-Child-jsx-3"><a href="#Left-Child-jsx-3" class="headerlink" title="Left_Child.jsx"></a>Left_Child.jsx</h5><h6 id="코드상에-“-“-키워드를-사용하여-설명합니다-16"><a href="#코드상에-“-“-키워드를-사용하여-설명합니다-16" class="headerlink" title="코드상에 “//“ 키워드를 사용하여 설명합니다."></a>코드상에 “//“ 키워드를 사용하여 설명합니다.</h6><h6 id="Right-Child-jsx는-Left-Child-jsx에서-판단로직만-“right”로-변경이-되기에-코드를-생략합니다-2"><a href="#Right-Child-jsx는-Left-Child-jsx에서-판단로직만-“right”로-변경이-되기에-코드를-생략합니다-2" class="headerlink" title="Right_Child.jsx는 Left_Child.jsx에서 판단로직만 “right”로 변경이 되기에 코드를 생략합니다."></a>Right_Child.jsx는 Left_Child.jsx에서 판단로직만 “right”로 변경이 되기에 코드를 생략합니다.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import Store from &quot;../store/store&quot;;</span><br><span class="line">// owner라는 상태를 갖고 있는 store 모듈을 import 합니다.</span><br><span class="line">import &#123;useObserver&#125; from &quot;mobx-react&quot;</span><br><span class="line">// Parent 컴포넌트와 마찬가지로 store와 이어주는 모듈을 import 합니다.</span><br><span class="line"></span><br><span class="line">export default function Left_Child() &#123;</span><br><span class="line"></span><br><span class="line">    const onClickChildToParent = () =&gt; &#123;</span><br><span class="line">        if(Store.owner == &apos;left&apos;)</span><br><span class="line">            Store.setOwner(&apos;parent&apos;);</span><br><span class="line">    // Parent 모듈과 다르게 store에 있는 setOwner를 호출해서 사용합니다.</span><br><span class="line">    // setOwner 메서드에는 &quot;this.owner = XXX&quot; 라는 로직이 있으므로 자동으로</span><br><span class="line">    // Action을 합니다.</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    const onClickLeftToRight = () =&gt; &#123;</span><br><span class="line">        if(Store.owner == &apos;left&apos;)</span><br><span class="line">            Store.setOwner(&apos;right&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        // return에서 useObserver 모듈을 사용하여 mobx의 store에 있는 상태값이 변경되면 rendering을 도와줍니다.</span><br><span class="line">        useObserver(()=&gt; (</span><br><span class="line">            &lt;div className=&#123;&apos;child&apos;&#125;&gt;</span><br><span class="line">                &lt;button onClick=&#123;onClickChildToParent&#125; className=&#123;&apos;btn-to-parent&apos;&#125;&gt;Pass to Parent&lt;/button&gt;</span><br><span class="line">                &lt;br/&gt;</span><br><span class="line">                Left Child</span><br><span class="line">                &lt;br/&gt;</span><br><span class="line">                &lt;div className=&#123;&apos;ball&apos;&#125; style=&#123;&#123;visibility: Store.owner == &apos;left&apos; ? &apos;unset&apos; :&apos;hidden&apos;&#125;&#125;&gt;ball&lt;/div&gt;</span><br><span class="line">                &lt;button onClick=&#123;onClickLeftToRight&#125; className=&#123;&apos;btn-left-to-right&apos;&#125;&gt;Pass to Right&lt;/button&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        ))</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="정리-3"><a href="#정리-3" class="headerlink" title="정리"></a>정리</h5><p><img src="/images/react/mobx_02.png" alt="mobx 개념"></p>
+<ul>
+<li>위의 그림은 예제 04번 mobx를 적용한 전체 개념도입니다. Store는 mobx로 정의한 상태값을 갖고 있습니다. 각 컴포넌트는 mobx-react 모듈의 Observer를 통해 해당 값에 감시를 하며 컴포넌트 내에서 직접 변경되거나 혹은 store의 setOwner를 호출하여 Action을 발생시킵니다. 이에 변경된 store 상태가 react 컴포넌트들에게 적용이 됩니다. </li>
+</ul>
+<h3 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h3><ul>
+<li>4개의 예제를 통해 사용자 입장에서 같은 기능이지만 내부적으로는 다른 구조를 만들어보는 시간을 갖어 보았습니다. 여러개의 내용을 다루다보니 깊이 있게는 가지 못했지만 대략적인 사용법을 익히고 개념을 잡을 수 있는 시간이 되었으면 합니다. 감사합니다.</li>
+</ul>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li>책 : 리액트를 다루는 기술(개정판)</li>
+<li><a href="https://velog.io/@velopert/react-redux-hooks" target="_blank" rel="noopener">https://velog.io/@velopert/react-redux-hooks</a></li>
+<li><a href="https://medium.com/@jsh901220/mobx-%EC%B2%98%EC%9D%8C-%EC%8B%9C%EC%9E%91%ED%95%B4%EB%B3%B4%EA%B8%B0-a768f4aaa73e" target="_blank" rel="noopener">https://medium.com/@jsh901220/mobx-%EC%B2%98%EC%9D%8C-%EC%8B%9C%EC%9E%91%ED%95%B4%EB%B3%B4%EA%B8%B0-a768f4aaa73e</a></li>
+<li>인프런 강의 [Redux vs Mobx]/ 강사 : 조현영</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/2019/12/29/react-hooks-chapter02/" data-id="ckvxpxbbg0042aotid59zszzp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "People and Technology"
+        },
+        "headline": "React-2부 [상태관리]",
+        "image": "http://yoursite.com/images/react-hooks.png",
+        "keywords": "react",
+        "genre": "IT Tech 3. React",
+        "datePublished": "2019-12-29",
+        "dateCreated": "2019-12-29",
+        "dateModified": "2021-11-13",
+        "url": "http://yoursite.com/2019/12/29/react-hooks-chapter02/",
+        "description": "
+작성자 : 플랫폼 개발실 R&amp;D팀 유주빈
+
+들어가기 앞서
+본글은 React의 hooks문법으로 작성이 되었습니다. 또한 기본적인 리액트 환경셋팅에 관한 내용은 다루지 않습니다. 리액트의 기본적인 환경셋팅에 관한 내용은 아래의 리액트 1부를 참고해 주세요.
+
+React 1부 : 개발환경 구축하기
+1부에서 리액트는 단방향 데이터 흐름을 갖고 있다고 하",
+        "wordCount": 9718
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/pntkorea/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/company/people-and-technology" target="_blank" rel="noopener">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/channel/UCjta-QWjrvGLDS_BpyV3C2w" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/IndoorPlus" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="slideshare" href="https://www.slideshare.net/AntonioHong" target="_blank" rel="noopener">
+                        <i class="icon fa fa-slideshare"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="http://www.pntbiz.co.kr/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/01/08/java-design-pattern-creational/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            디자인패턴 1부 - 생성패턴
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/12/24/java-refactoring-01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Java refactoring 1부</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/13/Kafka01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/kafka/kafka.png)" alt="카프카 1편 [구조 및 개념]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/4-java/">4. Java</a></p>
+                            <p class="item-title"><a href="/2021/11/13/Kafka01/" class="title">카프카 1편 [구조 및 개념]</a></p>
+                            <p class="item-date"><time datetime="2021-11-13T06:00:00.000Z" itemprop="datePublished">2021-11-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/09/influxDB-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/influxDB.png)" alt="InfluxDB-01 [살펴보기]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2021/10/09/influxDB-01/" class="title">InfluxDB-01 [살펴보기]</a></p>
+                            <p class="item-date"><time datetime="2021-10-09T05:56:55.000Z" itemprop="datePublished">2021-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/09/aws01_overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/aws/01/aws01_thumbnail.png)" alt="AWS 1편 [아마존 웹 서비스]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2020/08/09/aws01_overview/" class="title">AWS 1편 [아마존 웹 서비스]</a></p>
+                            <p class="item-date"><time datetime="2020-08-09T03:56:55.000Z" itemprop="datePublished">2020-08-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/05/react-hooks-chapter03-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-2부 [서버 연동]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/05/react-hooks-chapter03-2/" class="title">React-3-2부 [서버 연동]</a></p>
+                            <p class="item-date"><time datetime="2020-04-05T06:24:55.000Z" itemprop="datePublished">2020-04-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/04/react-hooks-chapter03-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-1부 [JWT와 React Router]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/04/react-hooks-chapter03-1/" class="title">React-3-1부 [JWT와 React Router]</a></p>
+                            <p class="item-date"><time datetime="2020-04-04T10:29:55.000Z" itemprop="datePublished">2020-04-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/">IT Tech</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/1-iot/">1. IoT</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/3-react/">3. React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/4-java/">4. Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/9-etc/">9. etc</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/">Recruit</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">AWS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/edge-computing/">Edge Computing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/influxdb/">InfluxDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iot/">IoT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lbs/">LBS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">Node.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pull-requests/">Pull requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtls/">RTLS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx/">VertX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beacon/">beacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dashboard/">dashboard</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-analysis/">data analysis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineer/">engineer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/">flutter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/platform/">platform</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recruit/">recruit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springBoot</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/aws/" style="font-size: 10px;">AWS</a> <a href="/tags/edge-computing/" style="font-size: 10px;">Edge Computing</a> <a href="/tags/influxdb/" style="font-size: 10px;">InfluxDB</a> <a href="/tags/iot/" style="font-size: 13.33px;">IoT</a> <a href="/tags/lbs/" style="font-size: 13.33px;">LBS</a> <a href="/tags/network/" style="font-size: 13.33px;">Network</a> <a href="/tags/node-js/" style="font-size: 13.33px;">Node.js</a> <a href="/tags/pull-requests/" style="font-size: 10px;">Pull requests</a> <a href="/tags/rtls/" style="font-size: 13.33px;">RTLS</a> <a href="/tags/vertx/" style="font-size: 13.33px;">VertX</a> <a href="/tags/beacon/" style="font-size: 10px;">beacon</a> <a href="/tags/dashboard/" style="font-size: 13.33px;">dashboard</a> <a href="/tags/data-analysis/" style="font-size: 13.33px;">data analysis</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/engineer/" style="font-size: 10px;">engineer</a> <a href="/tags/flutter/" style="font-size: 16.67px;">flutter</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/platform/" style="font-size: 10px;">platform</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/recruit/" style="font-size: 10px;">recruit</a> <a href="/tags/springboot/" style="font-size: 10px;">springBoot</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 People and Technology</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://yoursite.com/2019/12/29/react-hooks-chapter02/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

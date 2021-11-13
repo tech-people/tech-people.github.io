@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>스프링부트 시작하기 | People and Technology</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="springBoot">
+    
+    <meta name="description" content="작성자 : 플랫폼 개발실 서버개발팀 김은혜  스프링부트스프링 웹 어플리케이션을 만들기 위해서 서버 설치, config 설정 등의 여러 기본 설정들이 필요합니다. 또한, 템플릿 엔진의 버전과 Spring 버전의 호환성, 의존성을 확인하는 과정이 꼭 필요합니다.스프링부트는 이러한 과정을 거치지 않고도 빠른 개발이 가능케 합니다. 내장된 웹 서버(Tomcat,">
+<meta name="keywords" content="springBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="스프링부트 시작하기">
+<meta property="og:url" content="http://yoursite.com/2020/01/20/springboot01/index.html">
+<meta property="og:site_name" content="People and Technology">
+<meta property="og:description" content="작성자 : 플랫폼 개발실 서버개발팀 김은혜  스프링부트스프링 웹 어플리케이션을 만들기 위해서 서버 설치, config 설정 등의 여러 기본 설정들이 필요합니다. 또한, 템플릿 엔진의 버전과 Spring 버전의 호환성, 의존성을 확인하는 과정이 꼭 필요합니다.스프링부트는 이러한 과정을 거치지 않고도 빠른 개발이 가능케 합니다. 내장된 웹 서버(Tomcat,">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/springboot/springboot-thumbnail.png">
+<meta property="og:updated_time" content="2021-11-13T10:48:21.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="스프링부트 시작하기">
+<meta name="twitter:description" content="작성자 : 플랫폼 개발실 서버개발팀 김은혜  스프링부트스프링 웹 어플리케이션을 만들기 위해서 서버 설치, config 설정 등의 여러 기본 설정들이 필요합니다. 또한, 템플릿 엔진의 버전과 Spring 버전의 호환성, 의존성을 확인하는 과정이 꼭 필요합니다.스프링부트는 이러한 과정을 거치지 않고도 빠른 개발이 가능케 합니다. 내장된 웹 서버(Tomcat,">
+<meta name="twitter:image" content="http://yoursite.com/images/springboot/springboot-thumbnail.png">
+    
+
+    
+        <link rel="alternate" href="http://www.pntbiz.co.kr/" title="People and Technology" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">피플앤드테크놀러지 기술 블로그 / Tech Blog</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/">IT Tech</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/1-iot/">1. IoT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/3-react/">3. React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/4-java/">4. Java</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/it-tech/9-etc/">9. etc</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/">Recruit</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/it-tech/4-java/">4. Java</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-springboot01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        스프링부트 시작하기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/01/20/springboot01/" class="article-date">
+            <time datetime="2020-01-20T11:00:00.000Z" itemprop="datePublished">2020-01-20</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/springboot/">springBoot</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>작성자 : 플랫폼 개발실 서버개발팀 김은혜</p>
+</blockquote>
+<h2 id="스프링부트"><a href="#스프링부트" class="headerlink" title="스프링부트"></a>스프링부트</h2><p>스프링 웹 어플리케이션을 만들기 위해서 서버 설치, config 설정 등의 여러 기본 설정들이 필요합니다. 또한, 템플릿 엔진의 버전과 Spring 버전의 호환성, 의존성을 확인하는 과정이 꼭 필요합니다.<br>스프링부트는 이러한 과정을 거치지 않고도 빠른 개발이 가능케 합니다. 내장된 웹 서버(Tomcat, Jetty)와 의존성을 손쉽게 관리할 수 있는 스타터 POM(Project Object Model), 설정의 표준화와 자동화 등을 지원하여 보다 쉽게 웹 애플리케이션 개발할 수 있도록 도와줍니다. 이를 바탕으로 스프링부트는 ‘스프링부트 애플리케이션의 대부분은 스프링 설정을 필요로 하지 않는다’라고 설명하고 있습니다.</p>
+<p>이번 글은 스프링부트 프로젝트의 기본을 설정하면서 새롭게 알게된 정보들로 구성하여 작성했습니다.</p>
+<h2 id="스프링부트의-버전"><a href="#스프링부트의-버전" class="headerlink" title="스프링부트의 버전"></a>스프링부트의 버전</h2><p>스프링부트 1.0버전을 2014년 4월 1일 공개한 이후로 1.5.X버전은 2019년 8월 1일부로 지원을 중단했습니다.<br>현재는 2.2.X버전이 공개되어 있으며, 아래 예제는 최신 버전 2.2.X버전을 사용했습니다.<br>스프링부트 1.5.X 까지는 JDK 6과 7을 지원했지만 <em>2.2.X는 Java 8 이상이 필수</em>이며, Java 13까지 호환됩니다.<br>Build Tool로 Maven은 3.3+버전, Gradle은 5.X와 6.X을 지원합니다. Gradle은 4.10 또한 지원되지만 deprecated 되었습니다.<br>2.2.X버전에서 Tomcat은 9.0, Jetty는 9.4, Undertow는 2.0을 지원하고 있습니다.</p>
+<h2 id="개발환경"><a href="#개발환경" class="headerlink" title="개발환경"></a>개발환경</h2><p>예제 프로젝트의 개발환경은 아래와 같습니다.</p>
+<ul>
+<li>OS : Window 10</li>
+<li>IntelliJ IDEA Ultimate</li>
+<li>SpringBoot 2.2.X</li>
+<li>JDK 8</li>
+<li>Gradle 6.0.1</li>
+<li>MySql 5.6.41</li>
+</ul>
+<h3 id="1-프로젝트-생성하기"><a href="#1-프로젝트-생성하기" class="headerlink" title="1. 프로젝트 생성하기"></a>1. 프로젝트 생성하기</h3><p>IntelliJ에서는 Spring Initiallizr로 스프링부트 프로젝트의 생성을 시작합니다.</p>
+<p><img src="/images/springboot/springboot1.png" alt="프로젝트 생성1"></p>
+<p>Type은 Gradle Project로 생성했습니다. Packaging은 빠르고 간편하게 생성할 수 있는 Jar로 선택했습니다.<br>War는 기존과 같이 외부의 톰캣으로 배포하는 구조로 만들어지며, Jar로 로컬개발 및 테스트를 하다 나중에 배포할 때 War로 변경해서 배포할 수도 있습니다.</p>
+<p><img src="/images/springboot/springboot2.png" alt="프로젝트 생성2"></p>
+<ul>
+<li>eveloper Tools 의 Lombok</li>
+<li>Web의 Spring Web</li>
+<li>Template Engines의 Apache Freemarker<br>를 선택했습니다.</li>
+</ul>
+<p><img src="/images/springboot/springboot3.png" alt="프로젝트 생성3"></p>
+<p>프로젝트의 이름과 위치를 지정한 후 Finish로 프로젝트를 생성합니다.</p>
+<p><img src="/images/springboot/springboot4.png" alt="프로젝트 생성4"></p>
+<h3 id="2-프로젝트-구성"><a href="#2-프로젝트-구성" class="headerlink" title="2. 프로젝트 구성"></a>2. 프로젝트 구성</h3><p>프로젝트가 생성되면 다음 파일들이 생성됩니다.</p>
+<ul>
+<li>메인은 DemoApplication.java</li>
+<li>프로퍼티파일은 application.properties</li>
+<li>빌드는 build.gradle</li>
+</ul>
+<p><img src="/images/springboot/springboot5.png" alt="프로젝트 구성"></p>
+<p>톰캣 관련한 설정들은 스프링부트가 구동될 때 내부 모듈에 의해서 자동설정 됩니다.</p>
+<h4 id="1-DemoApplication-java"><a href="#1-DemoApplication-java" class="headerlink" title="1) DemoApplication.java"></a>1) DemoApplication.java</h4><p>스프링부트의 메인 class 입니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DemoApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>스프링부트의 Auto Configuration 기능을 사용하기 위해선 @EnableAutoConfiguration 또는 @SpringBootApplication 중 하나를 사용해야 합니다. @SpringBootApplication은 @EnableAutoConfiguration @ComponentScan @Configuration 를 포함하고 있습니다. </p>
+<ul>
+<li>@EnableAutoConfiguration : 스프링부트의 Auto Configuration 을 사용할 수 있습니다. 의존성 라이브러리를 기반으로 사용 가능성이 높은 bean을 추측해 자동으로 등록합니다.</li>
+<li>@ComponentScan : 사용할 application의 패키지를 bean으로 찾아서 등록합니다. (스프링부트 문서가 추천하는 방법입니다.)</li>
+<li>@Configuration : bean을 추가 등록하거나 configuration을 추가 import 할 때 사용합니다.</li>
+</ul>
+<p>데이터베이스 설정없이 구동하고 싶다면,<br>@SpringBootApplication 을<br>@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) 로 대체하면 오류없이 구동이 가능합니다.<br>구동 후 <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 을 입력하면 에러 페이지가 나오는데 이는 설정된 페이지가 없을 뿐, 정상적으로 실행은 가능합니다.</p>
+<p>간단하게 localhost 에서 페이지를 보고 싶다면 정적인 웹리소스를 관리하는 src/main/resources/static 안에 아래와 같은 index.html 을 하나 생성하고 구동하면 그 다음 아래와 같은 이미지를 볼 수 있습니다.<br>static 폴더는 처음 프로젝트를 만들 때 Web 라이브러리를 선택했다면 자동으로 생성됩니다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPEhtml&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">htmllang="en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">metacharset="UTF-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        Hello,SpringBoot!!</span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/springboot/springboot6.png" alt="Hello, SpringBoot!"></p>
+<h4 id="2-application-properties를-application-yml로"><a href="#2-application-properties를-application-yml로" class="headerlink" title="2) application.properties를 application.yml로"></a>2) application.properties를 application.yml로</h4><p>처음에는 빈 파일로 application.properties 파일이 생성됩니다.<br>생성된 파일에 먼저 freemarker의 경로를 설정했습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.freemarker.template-loader-path=classpath:/templates/</span><br><span class="line">spring.freemarker.suffix=.ftl</span><br></pre></td></tr></table></figure>
+
+<p>프로퍼티파일인 application.properties 파일은 아래와 같이 application.yml 파일로 변경해 사용할 수도 있습니다.<br>아래와 같이 가독성이 좋은 yml로 변경해서 설정을 변경해보았습니다.<br>/static/index.html 은 삭제해야만 localhost에서 /templates/index.ftl 이 실행이 됩니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  freemarker:</span><br><span class="line">    template-loader-path: classpath:/templates/</span><br><span class="line">    suffix: .ftl</span><br></pre></td></tr></table></figure>
+
+<p>yml 파일은 사람이 보기 편하며, profile은 하이픈(—)으로 나누어 환경에 따라 설정값을 다르게 가져갈 수 있는 장점이 있습니다.<br>주의사항으로 Yaml 언어는 공백 하나에도 민감합니다. 하위 계층으로 내려갈 때 탭이 아닌 스페이스바를 사용하고, 콜론(:)이나 하이픈(-) 이후에도 공백 한 칸이 필요합니다.</p>
+<h4 id="3-build-gradle"><a href="#3-build-gradle" class="headerlink" title="3) build.gradle"></a>3) build.gradle</h4><p>프로젝트 생성이 끝나면 빌드도구 Gradle의 설정파일이 아래와 같이 자동 설정됩니다. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id &apos;org.springframework.boot&apos; version &apos;2.2.2.RELEASE&apos;</span><br><span class="line">    id &apos;io.spring.dependency-management&apos; version &apos;1.0.8.RELEASE&apos;</span><br><span class="line">    id &apos;java&apos;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line">group = &apos;com.springboot&apos;</span><br><span class="line">version = &apos;0.0.1-SNAPSHOT&apos;</span><br><span class="line">sourceCompatibility = &apos;1.8&apos;</span><br><span class="line">   </span><br><span class="line">configurations &#123;</span><br><span class="line">    compileOnly &#123;</span><br><span class="line">        extendsFrom annotationProcessor</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;org.springframework.boot:spring-boot-starter-freemarker&apos;</span><br><span class="line">    implementation &apos;org.springframework.boot:spring-boot-starter-web&apos;</span><br><span class="line">    compileOnly &apos;org.projectlombok:lombok&apos;</span><br><span class="line">    annotationProcessor &apos;org.projectlombok:lombok&apos;</span><br><span class="line">    testImplementation(&apos;org.springframework.boot:spring-boot-starter-test&apos;) &#123;</span><br><span class="line">        exclude group: &apos;org.junit.vintage&apos;, module: &apos;junit-vintage-engine&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">test &#123;</span><br><span class="line">    useJUnitPlatform()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Repositories는 외부 jar파일들을 추가하기 위해 존재해야 하고, Repositories 정의는 default 값이 없으므로 꼭 정의가 필요합니다.</li>
+<li>mavenCentral() 저장소 또는 jcenter() 저장소를 사용할 수 있습니다. Url을 통해 원격으로 사용할 수도 있고, 로컬 저장소를 참조하여 사용할 수도 있습니다.</li>
+<li>dependencies는 필요한 라이브러리를 추가할 수 있으며, 버전도 같이 명시해 줄 수 있습니다.</li>
+</ul>
+<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a><em>참고</em></h4><p><em><code>&quot;Plugins 설정&quot;</code></em><br>Plugins 설정은 buildscripts와 plugins 두 가지 방식으로 선언이 가능합니다.<br>아래와 같은 buildscripts 방식은 고전적인 방식이라고 설명되어 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    def springBootVer = &quot;2.0.6.RELEASE&quot;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &quot;org.springframework.boot:spring-boot-gradle-plugin:$springBootVer&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">apply plugin :</span><br></pre></td></tr></table></figure>
+
+<p>Gradle 공식 문서에 따르면 Plugins DLS은 플러그인 의존성을 선언하는데 간결하며 편리한 방법을 제공하며, 코어 및 커뮤니티 플러그인에 모두 쉽게 접근할 수 있다고 합니다.<br>gradle 4.6부터 적용되었고 다른 버전의 플러그인을 각각 지정하거나 전역으로 적용할지에 대한 여부 등을 선택할 수도 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">            id &apos;org.springframework.boot&apos; version &apos;2.2.2.RELEASE&apos;</span><br><span class="line">            id &apos;io.spring.dependency-management&apos; version &apos;1.0.8.RELEASE&apos;</span><br><span class="line">            id &apos;java&apos;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p><em><code>&quot;빌드도구 Maven와 Gradle의 차이&quot;</code></em><br>빌드도구 Maven, Gradle은 라이브러리 의존성을 관리, 애플리케이션을 배포가능한 상태로 포장(Packaging or Archiving, 패키징 또는 아카이빙)하는 과정을 담당합니다.</p>
+<ul>
+<li>Maven은 XML을 사용하지만, Gradle은 Groovy 문법을 사용합니다.<ul>
+<li>XML을 사용함으로써 설정 내용이 길어지고 가독성이 복잡하지만, Gradle은 Tab으로 구분하여 스크립트 길이와 짧고 가독성이 좋습니다.</li>
+</ul>
+</li>
+<li>Gradle은 상속구조를 이용한 멀티 모듈 구현이 쉽습니다.</li>
+<li>Maven보다 Gradle의 빌드 속도가 최대 100배 빠르다고 합니다.<ul>
+<li>Gradle Daemon은 메모리에 오래 살아있으며, 변경에 영향을 받는 것들만 재컴파일을 실행합니다.</li>
+<li>Gradle은 캐시를 사용하기 때문에 테스트 반복 시 차이가 더 커집니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-MySql-연동-MyBatis-설정"><a href="#3-MySql-연동-MyBatis-설정" class="headerlink" title="3. MySql 연동 + MyBatis 설정"></a>3. MySql 연동 + MyBatis 설정</h3><p>MyBatis와 연결하기 위해서 build.gradle 에서 dependency를 추가해야 합니다.<br>첫 번째, <em>implementation ‘org.springframework.boot:spring-boot-starter-web’</em> 하단에<br><em>implementation ‘org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1’</em> 를 추가합니다.<br>두 번째, compileOnly ‘org.projectlombok:lombok’ 하단에<br><em>runtimeOnly ‘mysql:mysql-connector-java’</em> 를 추가합니다.</p>
+<p>추가 후 Gradle Toolbar를 열고 새로고침 아이콘에 마우스오버 하면 Reimport All Gradle Projects가 보이는데 클릭합니다.<br>실행완료 후 External Libraries에 mysql-connector-java와 mybatis 라이브러리가 정상적으로 import 됐는지 확인하면 됩니다.</p>
+<p><img src="/images/springboot/springboot7.png" alt="Reimport Gradle, Libraries 확인"></p>
+<p>application.yml 은 아래와 같이 datasource를 추가합니다.<br>com.mysql.jdbc.Driver는 deprecated 되었기 때문에 com.mysql.cj.jdbc.Driver를 적용해야 합니다.<br>스프링부트 2.0부터 HikariCP가 기본으로 변경되었다고 하며, 저는 hikari를 덧붙여 이름을 정의해 MySql을 연동했습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  freemarker:</span><br><span class="line">    template-loader-path: classpath:/templates/</span><br><span class="line">    suffix: .ftl</span><br><span class="line">  datasource:</span><br><span class="line">    hikari:</span><br><span class="line">      driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">      jdbc-url: jdbc:mysql://localhost/test?serverTimezone=UTC</span><br><span class="line">      username: scott</span><br><span class="line">      password: scott</span><br></pre></td></tr></table></figure>
+
+<p>다음 DemoApplication.java 내부에 빈들을 정의했습니다.<br>먼저 @ConfigrationProperties를 사용해 yml에 설정한 내용을 DataSource로 가져온 후, sqlSessionFactory와 sqlSessionTemplate을 구현했습니다.<br>setMapperLocations한 경로 아래 즉, resources 안에 mapper 폴더를 생성하고 그 내부에 ..Mapper.xml 을 생성하면 됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.datasource.hikari"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> DataSourceBuilder.create()</span><br><span class="line">            .type(HikariDataSource<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">            .<span class="title">build</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">sqlSessionFactory</span><span class="params">(DataSource dataSource, ApplicationContext applicationContext)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    SqlSessionFactoryBean sqlSessionFactoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">    sqlSessionFactoryBean.setDataSource(dataSource);</span><br><span class="line">    sqlSessionFactoryBean.setMapperLocations(<span class="keyword">new</span> PathMatchingResourcePatternResolver().getResources(<span class="string">"classpath:mapper/**.xml"</span>));</span><br><span class="line">    <span class="keyword">return</span> sqlSessionFactoryBean.getObject();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SqlSessionTemplate <span class="title">sqlSessionTemplate</span><span class="params">(SqlSessionFactory sqlSessionFactory)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MyBatis와 연동을 위해 사용할 VO로 java/com/springboot/web/demo 안에 user 폴더를 생성한 후 User.java를 생성했습니다.<br>Lombok을 사용하여 Getter, Setter를 만들어주었습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>예시로 사용할 select 쿼리를 포함한 UserMapper.xml을 생성했습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.example.demo.user.UserMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findOne"</span> <span class="attr">parameterType</span>=<span class="string">"Integer"</span> <span class="attr">resultType</span>=<span class="string">"com.example.demo.user.User"</span>&gt;</span></span><br><span class="line">        SELECT</span><br><span class="line">            num, name, email</span><br><span class="line">        FROM</span><br><span class="line">            user</span><br><span class="line">        WHERE</span><br><span class="line">            num = #&#123;value&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>UserMapper.xml과 연결을 위해 java/com/springboot/web/demo/user 안에 UserMapper.java를 생성했습니다.<br>간단하게 @Mapper를 사용했으며, 연결을 위해 …Mapper.xml 안의 id와 …Mapper.java 메서드의 이름을 동일하게 설정해주었습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">findOne</span><span class="params">(<span class="keyword">int</span> num)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>생성한 Mapper를 사용하기 위해 UserController를 생성했습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@RequestMapping</span>(value=<span class="string">"/user"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUserList</span><span class="params">(Model model)</span></span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">"user"</span>, userMapper.findOne(<span class="number">1</span>));</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"user"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Mapping 될 뷰로 resources.templates 안에 user.ftl을 추가해주었습니다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    Hello, Spring Boot!! <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    Hello, FreeMarker!! <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    Name : $&#123;user.name&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    Email : $&#123;user.email&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>실행 후 브라우저에서 <a href="http://localhost:8080/user" target="_blank" rel="noopener">http://localhost:8080/user</a> 을 띄우면 정상적으로 데이터가 보여지는 것을 확인할 수 있습니다.</p>
+<p><img src="/images/springboot/springboot8.png" alt="Hello, SpringBoot!!"></p>
+<h2 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h2><p>여기까지 스프링부트의 서버 설정 없이, 간단한 의존성 추가와 간단한 소스 구성으로 간단한 웹 프로젝트를 구축해 볼 수 있었습니다.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a href="https://medium.com/@yongkyu.jang/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-springboot-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%84%B1-1-%EC%B2%AB%EA%B1%B8%EC%9D%8C-2aa01e808f62" target="_blank" rel="noopener">https://medium.com/@yongkyu.jang/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-springboot-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%84%B1-1-%EC%B2%AB%EA%B1%B8%EC%9D%8C-2aa01e808f62</a></li>
+<li><a href="http://honeymon.io/tech/2019/06/17/spring-boot-2-start.html" target="_blank" rel="noopener">http://honeymon.io/tech/2019/06/17/spring-boot-2-start.html</a></li>
+<li><a href="https://d2.naver.com/helloworld/5626759" target="_blank" rel="noopener">https://d2.naver.com/helloworld/5626759</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/htmlsingle/#getting-started-introducing-spring-boot" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/htmlsingle/#getting-started-introducing-spring-boot</a></li>
+<li><a href="http://honeymon.io/tech/2019/06/17/spring-boot-2-start.html" target="_blank" rel="noopener">http://honeymon.io/tech/2019/06/17/spring-boot-2-start.html</a></li>
+<li><a href="https://jojoldu.tistory.com/250" target="_blank" rel="noopener">https://jojoldu.tistory.com/250</a></li>
+<li><a href="https://jojoldu.tistory.com/296" target="_blank" rel="noopener">https://jojoldu.tistory.com/296</a></li>
+<li><a href="https://bkim.tistory.com/13" target="_blank" rel="noopener">https://bkim.tistory.com/13</a></li>
+<li><a href="https://jeong-pro.tistory.com/159" target="_blank" rel="noopener">https://jeong-pro.tistory.com/159</a></li>
+<li><a href="https://waspro.tistory.com/504" target="_blank" rel="noopener">https://waspro.tistory.com/504</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/2020/01/20/springboot01/" data-id="ckvxpxbak003raoticfzp629y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "People and Technology"
+        },
+        "headline": "스프링부트 시작하기",
+        "image": "http://yoursite.com/images/springboot/springboot-thumbnail.png",
+        "keywords": "springBoot",
+        "genre": "IT Tech 4. Java",
+        "datePublished": "2020-01-20",
+        "dateCreated": "2020-01-20",
+        "dateModified": "2021-11-13",
+        "url": "http://yoursite.com/2020/01/20/springboot01/",
+        "description": "
+작성자 : 플랫폼 개발실 서버개발팀 김은혜
+
+스프링부트스프링 웹 어플리케이션을 만들기 위해서 서버 설치, config 설정 등의 여러 기본 설정들이 필요합니다. 또한, 템플릿 엔진의 버전과 Spring 버전의 호환성, 의존성을 확인하는 과정이 꼭 필요합니다.스프링부트는 이러한 과정을 거치지 않고도 빠른 개발이 가능케 합니다. 내장된 웹 서버(Tomcat,",
+        "wordCount": 1733
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/pntkorea/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/company/people-and-technology" target="_blank" rel="noopener">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/channel/UCjta-QWjrvGLDS_BpyV3C2w" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/IndoorPlus" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="slideshare" href="https://www.slideshare.net/AntonioHong" target="_blank" rel="noopener">
+                        <i class="icon fa fa-slideshare"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="http://www.pntbiz.co.kr/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/02/02/jedis-pool/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Jedis Pool 최적화
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/01/08/java-design-pattern-creational/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">디자인패턴 1부 - 생성패턴</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/13/Kafka01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/kafka/kafka.png)" alt="카프카 1편 [구조 및 개념]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/4-java/">4. Java</a></p>
+                            <p class="item-title"><a href="/2021/11/13/Kafka01/" class="title">카프카 1편 [구조 및 개념]</a></p>
+                            <p class="item-date"><time datetime="2021-11-13T06:00:00.000Z" itemprop="datePublished">2021-11-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/09/influxDB-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/influxDB.png)" alt="InfluxDB-01 [살펴보기]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2021/10/09/influxDB-01/" class="title">InfluxDB-01 [살펴보기]</a></p>
+                            <p class="item-date"><time datetime="2021-10-09T05:56:55.000Z" itemprop="datePublished">2021-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/09/aws01_overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/aws/01/aws01_thumbnail.png)" alt="AWS 1편 [아마존 웹 서비스]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/6-cloud/">6. Cloud</a></p>
+                            <p class="item-title"><a href="/2020/08/09/aws01_overview/" class="title">AWS 1편 [아마존 웹 서비스]</a></p>
+                            <p class="item-date"><time datetime="2020-08-09T03:56:55.000Z" itemprop="datePublished">2020-08-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/05/react-hooks-chapter03-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-2부 [서버 연동]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/05/react-hooks-chapter03-2/" class="title">React-3-2부 [서버 연동]</a></p>
+                            <p class="item-date"><time datetime="2020-04-05T06:24:55.000Z" itemprop="datePublished">2020-04-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/04/react-hooks-chapter03-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/react-hooks.png)" alt="React-3-1부 [JWT와 React Router]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/it-tech/">IT Tech</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/it-tech/3-react/">3. React</a></p>
+                            <p class="item-title"><a href="/2020/04/04/react-hooks-chapter03-1/" class="title">React-3-1부 [JWT와 React Router]</a></p>
+                            <p class="item-date"><time datetime="2020-04-04T10:29:55.000Z" itemprop="datePublished">2020-04-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/">IT Tech</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/1-iot/">1. IoT</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/2-data-analysis/">2. Data Analysis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/3-react/">3. React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/4-java/">4. Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/5-flutter/">5. Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/6-cloud/">6. Cloud</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/it-tech/9-etc/">9. etc</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/">Recruit</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/recruit/platform-engineer/">Platform Engineer</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">AWS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/edge-computing/">Edge Computing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/influxdb/">InfluxDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iot/">IoT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lbs/">LBS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">Node.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pull-requests/">Pull requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtls/">RTLS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx/">VertX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/beacon/">beacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dashboard/">dashboard</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-analysis/">data analysis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/engineer/">engineer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/">flutter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/platform/">platform</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recruit/">recruit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springBoot</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/aws/" style="font-size: 10px;">AWS</a> <a href="/tags/edge-computing/" style="font-size: 10px;">Edge Computing</a> <a href="/tags/influxdb/" style="font-size: 10px;">InfluxDB</a> <a href="/tags/iot/" style="font-size: 13.33px;">IoT</a> <a href="/tags/lbs/" style="font-size: 13.33px;">LBS</a> <a href="/tags/network/" style="font-size: 13.33px;">Network</a> <a href="/tags/node-js/" style="font-size: 13.33px;">Node.js</a> <a href="/tags/pull-requests/" style="font-size: 10px;">Pull requests</a> <a href="/tags/rtls/" style="font-size: 13.33px;">RTLS</a> <a href="/tags/vertx/" style="font-size: 13.33px;">VertX</a> <a href="/tags/beacon/" style="font-size: 10px;">beacon</a> <a href="/tags/dashboard/" style="font-size: 13.33px;">dashboard</a> <a href="/tags/data-analysis/" style="font-size: 13.33px;">data analysis</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/engineer/" style="font-size: 10px;">engineer</a> <a href="/tags/flutter/" style="font-size: 16.67px;">flutter</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/platform/" style="font-size: 10px;">platform</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/recruit/" style="font-size: 10px;">recruit</a> <a href="/tags/springboot/" style="font-size: 10px;">springBoot</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 People and Technology</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://yoursite.com/2020/01/20/springboot01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
